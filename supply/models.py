@@ -50,7 +50,7 @@ class OrderTable(models.Model):
     date_of_reciept = models.DateTimeField(blank=True, null=True)
     STATUS = [
         ("Pending", "Pending order"),
-        ("Partially In Stock", "Order is done and partially in Stock"),
+        ("Partially In Stock", "Order is partially in Stock"),
         ("Fully recieved", "Order is fully recieved to teacher"),
     ]
     status = models.CharField(max_length=25, choices=STATUS, default=STATUS[0][0])
