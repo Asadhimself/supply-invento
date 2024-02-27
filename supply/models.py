@@ -35,7 +35,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
             ("Storekeeper", "Storekeeper"),
             ("Teacher", "Teacher"),
         ],
-        default="customer",
+        default="Teacher",
     )
     user_class = models.CharField(
         max_length=20,
@@ -57,6 +57,21 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return f"{self.email} - {self.role}"
+    
+    def has_perm(self, perm, obj=None):
+        "Does the user have a specific permission?"
+        # Simplest possible answer: Yes, always
+        return True
+
+    def has_module_perms(self, app_label):
+        "Does the user have permissions to view the app `app_label`?"
+        # Simplest possible answer: Yes, always
+        return True
+
+    
+    class Meta:
+        verbose_name = "User"
+        verbose_name_plural = "Users"
 
 
 class OrderTable(models.Model):
