@@ -127,12 +127,3 @@ label {
 .headline img {
   width: 2.45rem;
 }
-
-.dropdown {
-  text-align: left;
-}
-
-select {
-  border-radius: 0.3rem;
-  width: 5rem;
-}
