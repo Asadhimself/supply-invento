@@ -1,0 +1,190 @@
+table {
+  width: 100%;
+  border-spacing: 0;
+  border-collapse: separate;
+  border-radius: 0.5rem;
+  background-color: white;
+  box-shadow: 0 0 1rem #ababab;
+  margin-bottom: 5rem;
+  font-size: 0.9rem;
+}
+
+.width-60 {
+  width: 60%;
+  margin: 3rem auto;
+}
+
+.width-15 {
+  width: 15%;
+}
+
+
+th {
+  background-color: #c3c3c3;
+}
+
+tr:first-child {
+  height: 3rem;
+}
+
+th, tr, td {
+  text-align: center;
+  height: 4.5rem;
+  padding: 0.5rem 0.4rem;
+  border-bottom: 2px solid #e1e1e1;
+}
+
+tr:hover {
+  background-color: #f4f7f8;
+}
+
+tr:first-child th:first-child {
+  border-top-left-radius: 0.5rem;
+}
+tr:first-child th:last-child {
+  border-top-right-radius: 0.5rem;
+}
+tr:last-child td:first-child {
+  border-bottom-left-radius: 0.5rem;
+}
+tr:last-child td:last-child {
+  border-bottom-right-radius: 0.5rem;
+}
+
+.table-image {
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 3.5rem;
+  height: 3.5rem;
+  overflow: hidden;
+  border-radius: 0.4rem;
+  border: 1px solid #ababab;
+}
+
+.table-image > img {
+  width: 100%;
+  height: auto;
+}
+
+.item-cell {
+  width: 12%;
+}
+
+.comment-cell {
+  max-width: 20%;
+}
+
+.status-cell {
+  max-width: 5%;
+}
+
+.status-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 800;
+}
+
+.status-box p {
+  width: 6rem;
+  padding: 0.5rem 0;
+  border-radius: 0.5rem;
+}
+
+.status-full {
+  background-color: #7ae582;
+  color: #004b23;
+}
+
+.status-partial {
+  background-color: orange;
+  color: rgb(69, 49, 0);
+}
+
+.status-pending {
+  background-color: gold;
+  color: rgb(52, 39, 1);
+}
+
+.sm-comment-cell {
+  width: 8%;
+  padding: 0 1rem;
+}
+
+.action-box {
+  display: flex;
+  margin: 0 auto;
+  justify-content: center;
+  align-items: center;
+  width: 5rem;
+  gap: 0.5rem;
+}
+
+.action-box img {
+  width: 2rem;
+}
+
+.tab {
+  display: flex;
+  margin-left: 1rem;
+  margin-bottom: -1px;
+  z-index: 1;
+}
+
+.tablinks {
+  width: 6rem;
+  border: 1px solid #ababab;
+  padding: 0.3rem 0.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.tablinks:first-child {
+  border-top-left-radius: 0.5rem;
+}
+
+.tablinks:last-child {
+  border-top-right-radius: 0.5rem;
+}
+
+.active-tab {
+  background-color: #c3c3c3;
+  border-color: #c3c3c3;
+  border-top-color: #ababab;
+}
+
+.searchbox {
+  width: 13rem;
+  margin-left: 4rem;
+  display: flex;
+  height: 2rem;
+  background-color: white;
+  border-radius: 0.5rem;
+  border: 1px solid #ababab;
+}
+
+.search-input {
+  padding: 0.4rem;
+  border-radius: 0.5rem;
+  border: 1px solid transparent;
+}
+
+.search-input:focus {
+  outline: none;
+}
+
+.search-btn {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 0.5rem;
+  border: transparent;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.search-btn > img {
+  width: 1.8rem;
+}

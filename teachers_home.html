@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home</title>
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/table.css">
+</head>
+<body>
+
+  <header>
+    <nav>
+      <div class="nav-item">
+          <img src="/assets/supplier.png" alt="role logo">
+      </div>
+      <div class="nav-item">
+        <a href="#" class="nav-link">
+          <img src="/assets/icons8-home-96.png" alt="home">
+          <p>Home</p>
+        </a>
+      </div>
+      <div class="nav-item">
+        <a href="#" class="nav-link">
+          <img src="/assets/icons8-account-96.png" alt="profile">
+          <p>User Name</p>
+        </a>
+      </div>
+      <div class="nav-item">
+        <a href="#" class="nav-link">
+          <img src="/assets/icons8-logout-96.png" alt="logout">
+          <p>Logout</p>
+        </a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    
+    <div class="main-subcontainer">
+      <div class="options">
+        <a href="#" class="add-item-link">Add Item</a>
+        <a href="#" class="archive-link">Archive</a>
+      </div>
+      <div class="tab">
+        <button class="tablinks active-tab" onclick="filterTable('all', event)">All</button>
+        <button class="tablinks" onclick="filterTable('pending', event)">Pending</button>
+        <button class="tablinks" onclick="filterTable('partial', event)">Partial</button>
+        <button class="tablinks" onclick="filterTable('full', event)">Full</button>
+      </div>
+      <table id="original-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Item</th>
+            <th>Image</th>
+            <th>Quantity</th>
+            <th>Measurement</th>
+            <th>Delivered Quantity</th>
+            <th>Teacher's Comment</th>
+            <th>Status</th>
+            <th>SM Comment</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>test</td>
+            <td class="item-cell">Something</td>
+            <td>
+              <div class="table-image">
+                <img src="/assets/teacher.png" alt="">
+              </div>
+            </td>
+            <td>test</td>
+            <td>test</td>
+            <td>test</td>
+            <td class="comment-cell">Just a comment</td>
+            <td class="status-cell">
+              <div class="status-box">
+                <p class="status status-pending">Pending</p>
+              </div>
+            </td>
+            <td class="sm-comment-cell">Test for something and somewhere</td>
+            <td>
+              <div class="action-box">
+                <a href="#" class="action-link">
+                  <img src="/assets/edit-64.png" alt="edit button">
+                </a>
+                <a href="#" class="action-link">
+                  <img src="/assets/delete-64.png" alt="delete button">
+                </a>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>test2</td>
+            <td class="item-cell">Something for somebody</td>
+            <td>
+              <div class="table-image">
+                <img src="/assets/admin.png" alt="">
+              </div>
+            </td>
+            <td>test2</td>
+            <td>test2</td>
+            <td>test2</td>
+            <td class="comment-cell">Just a comment</td>
+            <td class="status-cell">
+              <div class="status-box">
+                <p class="status status-partial">Partial</p>
+              </div>
+            </td>
+            <td>test2</td>
+            <td>
+              <div class="action-box">
+                <a href="#" class="action-link">
+                  <img src="/assets/edit-64.png" alt="edit button">
+                </a>
+                <a href="#" class="action-link">
+                  <img src="/assets/delete-64.png" alt="delete button">
+                </a>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>test3</td>
+            <td class="item-cell">Something for somebody</td>
+            <td>
+              <div class="table-image">
+                <img src="/assets/storekeeper.png" alt="">
+              </div>
+            </td>
+            <td>test3</td>
+            <td>test3</td>
+            <td>test3</td>
+            <td class="comment-cell">Just a comment</td>
+            <td class="status-cell">
+              <div class="status-box">
+                <p class="status status-full">Full</p>
+              </div>
+            </td>
+            <td>test3</td>
+            <td>
+              <div class="action-box">
+                <a href="#" class="action-link">
+                  <img src="/assets/edit-64.png" alt="edit button">
+                </a>
+                <a href="#" class="action-link">
+                  <img src="/assets/delete-64.png" alt="delete button">
+                </a>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>test2</td>
+            <td class="item-cell">Something for somebody</td>
+            <td>
+              <div class="table-image">
+                <img src="/assets/admin.png" alt="">
+              </div>
+            </td>
+            <td>test2</td>
+            <td>test2</td>
+            <td>test2</td>
+            <td class="comment-cell">Just a comment</td>
+            <td class="status-cell">
+              <div class="status-box">
+                <p class="status status-partial">Partial</p>
+              </div>
+            </td>
+            <td>test2</td>
+            <td>
+              <div class="action-box">
+                <a href="#" class="action-link">
+                  <img src="/assets/edit-64.png" alt="edit button">
+                </a>
+                <a href="#" class="action-link">
+                  <img src="/assets/delete-64.png" alt="delete button">
+                </a>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>test4</td>
+            <td class="item-cell">Something for somebody</td>
+            <td>
+              <div class="table-image">
+                <img src="/assets/storekeeper.png" alt="">
+              </div>
+            </td>
+            <td>test4</td>
+            <td>test4</td>
+            <td>test4</td>
+            <td class="comment-cell">Just a comment</td>
+            <td class="status-cell">
+              <div class="status-box">
+                <p class="status status-full">Full</p>
+              </div>
+            </td>
+            <td>test4</td>
+            <td>
+              <div class="action-box">
+                <a href="#" class="action-link">
+                  <img src="/assets/edit-64.png" alt="edit button">
+                </a>
+                <a href="#" class="action-link">
+                  <img src="/assets/delete-64.png" alt="delete button">
+                </a>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>test2</td>
+            <td class="item-cell">Something for somebody</td>
+            <td>
+              <div class="table-image">
+                <img src="/assets/admin.png" alt="">
+              </div>
+            </td>
+            <td>test2</td>
+            <td>test2</td>
+            <td>test2</td>
+            <td class="comment-cell">Just a comment</td>
+            <td class="status-cell">
+              <div class="status-box">
+                <p class="status status-partial">Partial</p>
+              </div>
+            </td>
+            <td>test2</td>
+            <td>
+              <div class="action-box">
+                <a href="#" class="action-link">
+                  <img src="/assets/edit-64.png" alt="edit button">
+                </a>
+                <a href="#" class="action-link">
+                  <img src="/assets/delete-64.png" alt="delete button">
+                </a>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>test2</td>
+            <td class="item-cell">Something for somebody</td>
+            <td>
+              <div class="table-image">
+                <img src="/assets/admin.png" alt="">
+              </div>
+            </td>
+            <td>test2</td>
+            <td>test2</td>
+            <td>test2</td>
+            <td class="comment-cell">Just a comment</td>
+            <td class="status-cell">
+              <div class="status-box">
+                <p class="status status-partial">Partial</p>
+              </div>
+            </td>
+            <td>test2</td>
+            <td>
+              <div class="action-box">
+                <a href="#" class="action-link">
+                  <img src="/assets/edit-64.png" alt="edit button">
+                </a>
+                <a href="#" class="action-link">
+                  <img src="/assets/delete-64.png" alt="delete button">
+                </a>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>test2</td>
+            <td class="item-cell">Something for somebody</td>
+            <td>
+              <div class="table-image">
+                <img src="/assets/admin.png" alt="">
+              </div>
+            </td>
+            <td>test2</td>
+            <td>test2</td>
+            <td>test2</td>
+            <td class="comment-cell">Just a comment</td>
+            <td class="status-cell">
+              <div class="status-box">
+                <p class="status status-partial">Partial</p>
+              </div>
+            </td>
+            <td>test2</td>
+            <td>
+              <div class="action-box">
+                <a href="#" class="action-link">
+                  <img src="/assets/edit-64.png" alt="edit button">
+                </a>
+                <a href="#" class="action-link">
+                  <img src="/assets/delete-64.png" alt="delete button">
+                </a>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>test2</td>
+            <td class="item-cell">Something for somebody</td>
+            <td>
+              <div class="table-image">
+                <img src="/assets/admin.png" alt="">
+              </div>
+            </td>
+            <td>test2</td>
+            <td>test2</td>
+            <td>test2</td>
+            <td class="comment-cell">Just a comment</td>
+            <td class="status-cell">
+              <div class="status-box">
+                <p class="status status-partial">Partial</p>
+              </div>
+            </td>
+            <td>test2</td>
+            <td>
+              <div class="action-box">
+                <a href="#" class="action-link">
+                  <img src="/assets/edit-64.png" alt="edit button">
+                </a>
+                <a href="#" class="action-link">
+                  <img src="/assets/delete-64.png" alt="delete button">
+                </a>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+
+      </table>
+    </div>
+
+  </main>
+
+  <script src="table.js"></script>
+</body>
+</html>
