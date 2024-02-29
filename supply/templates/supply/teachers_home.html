@@ -1,11 +1,8 @@
 {% extends 'supply/base.html' %}
 {% load static %}
 
-{% block title %}Supply Invento {% endblock title %}
-{% block css %}<link rel="stylesheet" href="{% static 'supply/css/table.css' %}">{% endblock css %}
-
-{% block role %}{% static "supply/assets/teacher.png" %}{% endblock  %}
-{% block email %}{{email}}{% endblock %}
+{% block title %}Supply Invento{% endblock title %}
+{% block head %}<link rel="stylesheet" href="{% static 'css/table.css' %}">{% endblock head %}
 
 
 
@@ -13,7 +10,7 @@
 <main>
     <div class="main-subcontainer">
       <div class="options">
-        <a href="#" class="add-item-link">Add Item</a>
+        <a href="{% url 'add_order' %}" class="add-item-link">Add Item</a>
         <a href="#" class="archive-link">Archive</a>
       </div>
       <div class="tab">
@@ -34,7 +31,7 @@
             <th>Teacher's Comment</th>
             <th>Status</th>
             <th>SM Comment</th>
-            <th>Action</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -60,10 +57,10 @@
             <td>
               <div class="action-box">
                 <a href="#" class="action-link">
-                  <img src="{% static 'supply/assets/edit-64.png' %}" alt="edit button">
+                  <img src="{% static 'assets/edit-64.png' %}" alt="edit button">
                 </a>
                 <a href="#" class="action-link">
-                  <img src="{% static 'supply/assets/delete-64.png' %}" alt="delete button">
+                  <img src="{% static 'assets/delete-64.png' %}" alt="delete button">
                 </a>
               </div>
             </td>
@@ -73,7 +70,7 @@
 
       </table>
     </div>
-    <script src="{% static "supply/js/table.js" %}"></script>
+    <script src="{% static "js/table.js" %}"></script>
 
 </main>
 {% endblock %}

@@ -1,9 +1,8 @@
-from math import e
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
-from django.urls import reverse
 from .models import OrderTable, CustomUser
+from .forms import OrderForm
 
 
 def login_view(request):
@@ -29,6 +28,9 @@ def logout_view(request):
     logout(request)
     return redirect("login")
 
+def base_view(request):
+    return render(request, 'supply/base.html')
+
 
 @login_required(login_url="/login")
 def home_view(request):
@@ -41,3 +43,17 @@ def home_view(request):
         email = request.user.email
         return render(request, "supply/teachers_home.html", {"table": table, "email": email})
     return render(request, "supply/home.html")
+
+@login_required(login_url='/login')
+def add_order_view(request):
+    if request.method == "POST":
+        form = OrderForm(request.POST)
+        if form.is_valid():
+            order = form.save(commit=False)
+            order.customer = request.user
+            order.save()
+            return redirect('teachers_home')
+    else:
+        form = OrderForm()
+
+    return render(request, "supply/add_order.html")
