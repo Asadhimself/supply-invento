@@ -1,7 +1,18 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{%block title%}{% endblock %}</title>
+  <link rel="stylesheet" href="{% static "supply/css/main.css" %}">
+  <link rel="stylesheet" href="{% static "supply/css/add_order.css" %}">
+</head>
+
 <header>
     <nav>
       <div class="nav-item">
-        <a href="#" class="nav-link">
+        <a href="{% url 'home' %}" class="nav-link">
           <img src="{% static "supply/assets/icons8-home-96.png" %}" alt="home">
           <p>Home</p>
         </a>
@@ -13,10 +24,12 @@
         </a>
       </div>
       <div class="nav-item">
-        <a href="#" class="nav-link">
+        <a href="{% url 'logout' %}" class="nav-link">
           <img src="{% static "supply/assets/icons8-logout-96.png" %}" alt="logout">
           <p>Logout</p>
         </a>
       </div>
     </nav>
   </header>
+
+  {% block content %} {% endblock %}
