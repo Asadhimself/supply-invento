@@ -29,10 +29,11 @@
             <div class="error"></div>
         </div>
         <button type="submit" class="submit_btn login_button">Login</button>
-    </div>
-    {% if error_message %}
+        {% if error_message %}
             <div class="error">{{ error_message }}</div>
-    {% endif %}
+        {% endif %}
+    </div>
+    
 </form>
 
 

@@ -1,0 +1,80 @@
+{% extends 'supply/base.html' %}
+{% load static %}
+
+{% block title %}Supply Invento {% endblock title %}
+{% block css %}<link rel="stylesheet" href="{% static 'supply/css/table.css' %}">{% endblock css %}
+
+{% block role %}{% static "supply/assets/teacher.png" %}{% endblock  %}
+{% block email %}{{email}}{% endblock %}
+
+
+
+{% block content%}
+<main>
+    <div class="main-subcontainer">
+      <div class="options">
+        <a href="#" class="add-item-link">Add Item</a>
+        <a href="#" class="archive-link">Archive</a>
+      </div>
+      <div class="tab">
+        <button class="tablinks active-tab" onclick="filterTable('all', event)">All</button>
+        <button class="tablinks" onclick="filterTable('pending', event)">Pending</button>
+        <button class="tablinks" onclick="filterTable('partial', event)">Partial</button>
+        <button class="tablinks" onclick="filterTable('full', event)">Full</button>
+      </div>
+      <table id="original-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Item</th>
+            <th>Image</th>
+            <th>Quantity</th>
+            <th>Measurement</th>
+            <th>Delivered Quantity</th>
+            <th>Teacher's Comment</th>
+            <th>Status</th>
+            <th>SM Comment</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for number, order in table%}
+          <tr>
+            <td>{{number}}</td>
+            <td class="item-cell">{{order.name}}</td>
+            <td>
+              <div class="table-image">
+                <img src="{{order.image_url}}" alt="">
+              </div>
+            </td>
+            <td>{{order.quantity}}</td>
+            <td>{{order.measurement}}</td>
+            <td>{{order.delivered_quantity}}</td>
+            <td class="comment-cell">{{order.teachers_comment}}</td>
+            <td class="status-cell">
+              <div class="status-box">
+                <p class="status status-pending">{{order.status}}</p>
+              </div>
+            </td>
+            <td class="sm-comment-cell">{{order.sm_comment}}</td>
+            <td>
+              <div class="action-box">
+                <a href="#" class="action-link">
+                  <img src="{% static 'supply/assets/edit-64.png' %}" alt="edit button">
+                </a>
+                <a href="#" class="action-link">
+                  <img src="{% static 'supply/assets/delete-64.png' %}" alt="delete button">
+                </a>
+              </div>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+
+      </table>
+    </div>
+    <script src="{% static "supply/js/table.js" %}"></script>
+
+</main>
+{% endblock %}
+
