@@ -52,8 +52,8 @@ def add_order_view(request):
             order = form.save(commit=False)
             order.customer = request.user
             order.save()
-            return redirect('teachers_home')
+            return redirect('home')
     else:
         form = OrderForm()
 
-    return render(request, "supply/add_order.html")
+    return render(request, "supply/add_order.html", {'form': form})
