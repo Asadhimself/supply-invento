@@ -49,7 +49,7 @@ class OrderTableAdmin(admin.ModelAdmin):
     readonly_fields = ('order_date', )
     list_display = ('name', 'user', 'get_photo', 'status')
     list_filter = ('status', )
-    search_fields = ('user', )
+    search_fields = ('user__first_name', 'user__last_name', 'user__email', 'name')
     def get_photo(self, obj):
         if obj.image_url:
             return mark_safe(f'<img src="{obj.image_url}" width=50px>')

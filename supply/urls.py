@@ -7,9 +7,11 @@ from supply.views import (
     logout_view,
     add_order_view,
     delete_order_view,
+    manage_teachers_table,
     profile_view,
     section_view,
-    sm_teachers_table,
+    sm_edit_view,
+    st_edit_view,
 )
 
 
@@ -22,5 +24,7 @@ urlpatterns = [
     path("delete_order/<int:order_id>", delete_order_view, name="delete_order"),
     path("profile/<int:user_id>", profile_view, name="profile"),
     path("section/<str:pk>", section_view, name="section"),
-    path("sm_table/<int:user_id>", sm_teachers_table, name="sm_table"),
+    path("manage_table/<int:user_id>", manage_teachers_table, name="manage_table"),
+    path("sm_edit/<int:order_id>", sm_edit_view, name="sm_edit"),
+    path("st_edit/<int:order_id>", st_edit_view, name="st_edit"),
 ]

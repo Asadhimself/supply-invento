@@ -1,0 +1,74 @@
+{% extends 'supply/base.html' %}
+
+{% load static %}
+
+{% block title %}
+Edit
+{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static '/css/add_order.css' %}" />
+<link rel="stylesheet" href="{% static '/css/table.css' %}" />
+{% endblock %}
+
+{% block content %}
+<form id="form" class="add-order-container" method="post">
+  {% csrf_token %}
+  <div class="add-order-subcontainer">
+    <div class="headline">
+      <img src="{% static '/assets/invento_logo.png' %}" alt="school logo" class="headline-logo" />
+      <h1 class="title">Edit the item</h1>
+    </div>
+    <div class="input-control">
+      <label for="sm_comments">ST Comments</label>
+      <input id="sm_comments" name="st_comments" type="text" placeholder="None" value="{{order.st_comments}}" />
+    </div>
+    <div class="input-control">
+      <label for="in_stock">In Stock</label>
+      {% if order.in_stock is not None %}
+      <input id="price" name="in_stock" type="text" placeholder="None" value="{{order.in_stock}}" />
+      {% else %}
+      <input id="price" name="in_stock" type="text" placeholder="No in stock set" />
+      {% endif %}
+      <div class="error"></div>
+    </div>
+    <div class="input-control">
+      <label for="teacher_recieved">Teacher Recieved</label>
+      {% if order.teacher_recieved is not None %}
+      <input id="price" name="teacher_recieved" type="text" placeholder="None" value="{{order.teacher_recieved}}" />
+      {% else %}
+      <input id="price" name="teacher_recieved" type="text" placeholder="Teacher not recieved yet" />
+      {% endif %}
+      <div class="error"></div>
+    </div>
+    <div class="input-control">
+      <label for="delivered_quantity">Delivered Quantity</label>
+      {% if order.delivered_quantity is not None %}
+      <input id="price" name="delivered_quantity" type="number" placeholder="None" value="{{order.delivered_quantity}}" />
+      {% else %}
+      <input id="price" name="delivered_quantity" type="number" placeholder="Nothing delivered yet" />
+      {% endif %}
+      <div class="error"></div>
+    </div>
+    <div class="dropdown">
+      <label for="status">Status:</label>
+      <select name="status" id="status">
+        {% if order.status == "Pending" %}
+        <option selected value="Pending">Pending</option>
+        <option value="Partially In Stock">Partial</option>
+        <option value="Fully recieved">Full</option>
+        {% elif order.status == "Partially In Stock" %}
+        <option value="Pending">Pending</option>
+        <option selected value="Partially In Stock">Partial</option>
+        <option value="Fully recieved">Full</option>
+        {% else %}
+        <option value="Pending">Pending</option>
+        <option value="Partially In Stock">Partial</option>
+        <option selected value="Fully recieved">Full</option>
+        {% endif %}
+      </select>
+    </div>
+    <button type="submit" class="submit_btn">Edit</button>
+  </div>
+</form>
+{% endblock %}

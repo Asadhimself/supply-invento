@@ -79,17 +79,19 @@ class OrderTable(models.Model):
     image_url = models.URLField()
     quantity = models.PositiveIntegerField(default=1)
     measurement = models.CharField(max_length=25)
-    delivered_quantity = models.PositiveIntegerField(default=None, blank=True, null=True)
+    delivered_quantity = models.PositiveIntegerField(blank=True, null=True)
     teachers_comments = models.TextField(null=True, blank=True)
-    price = models.PositiveIntegerField(default=None, blank=True, null=True)
-    teacher_recieved = models.PositiveIntegerField(default=None, blank=True, null=True)
+    price = models.PositiveIntegerField(blank=True, null=True)
+    teacher_recieved = models.PositiveIntegerField(blank=True, null=True)
     st_comments = models.TextField(null=True, blank=True)
     sm_comments = models.TextField(null=True, blank=True)
     order_date = models.DateTimeField(auto_now_add=True)
     date_of_reciept = models.DateTimeField(blank=True, null=True)
+    in_stock = models.PositiveIntegerField(blank=True, null=True)
     STATUS = [
         ("Pending", "Pending order"),
         ("Partially In Stock", "Order is partially in Stock"),
+        ("Fully In Stock", "Order is fully in Stock"),
         ("Fully recieved", "Order is fully recieved to teacher"),
     ]
     status = models.CharField(max_length=25, choices=STATUS, default=STATUS[0][0])

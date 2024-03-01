@@ -22,6 +22,12 @@
           <option value="25">25</option>
           <option value="50">50</option>
           <option value="100">100</option>
+          <div class="date-range">
+            <label for="min_date" class="show-label">Min Date:</label>
+            <input type="date" name="min_date" id="min_date" class="date-box">
+            <label for="max_date" class="show-label">Max Date:</label>
+            <input type="date" name="max_date" id="max_date" class="date-box">
+          </div>
         </select>
       </div>
       <div class="tab">
@@ -46,6 +52,7 @@
             <th>Delivered</th>
             <th>Teachers Comments</th>
             <th>Price</th>
+            <th>In Stock</th>
             <th>Teacher Received</th>
             <th>ST Comments</th>
             <th>SM Comments</th>
@@ -70,6 +77,7 @@
             <td>{{order.delivered_quantity}}</td>
             <td class="comment-cell">{{order.teachers_comments}}</td>
             <td>{{order.price}}</td>
+            <td>{{order.in_stock}}</td>
             <td>{{order.teacher_recieved}}</td>
             <td class="sm-comment-cell">{{order.st_comments}}</td>
             <td class="sm-comment-cell">{{order.sm_comments}}</td>
@@ -82,7 +90,11 @@
             </td>
             <td>
               <div class="action-box">
-                <a href="#" class="action-link"><img src="{% static '/assets/edit-64.png' %}" alt="edit button" /></a>
+                {% if user.role == "Supplier" %}
+                <a href="{% url "sm_edit" order.id %}" class="action-link"><img src="{% static '/assets/edit-64.png' %}" alt="edit button" /></a>
+                {% else %}
+                <a href="{% url "st_edit" order.id %}" class="action-link"><img src="{% static '/assets/edit-64.png' %}" alt="edit button" /></a>
+                {% endif %}
                 <a href="#" class="action-link"><img src="{% static '/assets/delete-64.png' %}" alt="delete button" /></a>
               </div>
             </td>

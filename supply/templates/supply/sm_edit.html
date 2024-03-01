@@ -1,0 +1,46 @@
+{% extends 'supply/base.html' %}
+
+{% load static %}
+
+{% block title %}
+Edit
+{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static '/css/add_order.css' %}" />
+<link rel="stylesheet" href="{% static '/css/table.css' %}" />
+{% endblock %}
+
+{% block content %}
+<form id="form" class="add-order-container" method="post">
+  {% csrf_token %}
+  <div class="add-order-subcontainer">
+    <div class="headline">
+      <img src="{% static '/assets/invento_logo.png' %}" alt="school logo" class="headline-logo" />
+      <h1 class="title">Edit the item</h1>
+    </div>
+    <div class="input-control">
+      <label for="sm_comments">SM Comments</label>
+      <input id="sm_comments" name="sm_comments" type="text" placeholder="None" value="{{order.sm_comments}}" />
+    </div>
+    <div class="input-control">
+      <label for="price">Price</label>
+      {% if order.price is not None %}
+      <input id="price" name="price" type="text" placeholder="None" value="{{order.price}}" />
+      {% else %}
+      <input id="price" name="price" type="text" placeholder="No price set" />
+      {% endif %}
+      <div class="error"></div>
+    </div>
+    <div class="dropdown">
+      <label for="status">Status:</label>
+      <select name="status" id="status">
+        <option value="Pending">Pending</option>
+        <option value="Partially In Stock">Partial</option>
+        <option value="Fully recieved">Full</option>
+      </select>
+    </div>
+    <button type="submit" class="submit_btn">Edit</button>
+  </div>
+</form>
+{% endblock %}

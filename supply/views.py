@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import Http404, HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from .models import CustomUser, OrderTable
-from .forms import OrderForm
+from .forms import OrderForm, SmOrderEdit, StOrderEdit
 
 
 def login_view(request):
@@ -41,9 +41,9 @@ def home_view(request):
             order.status = order.status.split()[0]
         table = list(enumerate(table, start=1))
         return render(request, "supply/teachers_home.html", {"table": table})
-    elif request.user.role == "Supplier":
+    elif request.user.role == "Supplier" or request.user.role == "Storekeeper":
         classes = ["EYPYP", "PYP", "MYP", "DP"]
-        return render(request, "supply/suppliers_home.html", {"classes": classes})
+        return render(request, "supply/manager_home.html", {"classes": classes})
     return render(request, "supply/home.html")
 
 
@@ -99,6 +99,8 @@ def profile_view(request, user_id):
 
 @login_required(login_url="/login")
 def section_view(request, pk):
+    if request.user.role not in ["Supplier", "Storekeeper"]:
+        return HttpResponse("Access is forbidden")
     if pk not in ["EYPYP", "PYP", "MYP", "DP"]:
         return Http404()
     teachers = CustomUser.objects.filter(user_class=pk)
@@ -108,11 +110,43 @@ def section_view(request, pk):
 
 
 @login_required(login_url="/login")
-def sm_teachers_table(request, user_id):
+def manage_teachers_table(request, user_id):
+    if request.user.role not in ["Supplier", "Storekeeper"]:
+        return HttpResponse("Access is forbidden")
     orders = OrderTable.objects.filter(user=user_id)
     for order in orders:
         order.status = order.status.split()[0]
     teacher = CustomUser.objects.get(id=user_id)
     return render(
-        request, "supply/sm_teachers_table.html", {"orders": orders, "teacher": teacher}
+        request, "supply/manage_teachers_table.html", {"orders": orders, "teacher": teacher}
     )
+
+
+@login_required(login_url="/login")
+def sm_edit_view(request, order_id):
+    if request.user.role != "Supplier":
+        return HttpResponse("Access is forbidden")
+    order = get_object_or_404(OrderTable, pk=order_id)
+    if request.method == "POST":
+        form = SmOrderEdit(request.POST, instance=order)
+        form.save()
+        user_id = order.user.id
+        return redirect("manage_table", user_id)
+    else:
+        form = SmOrderEdit(instance=order)
+    return render(request, "supply/sm_edit.html", {"form": form, "order": order})
+
+
+@login_required
+def st_edit_view(request, order_id):
+    if request.user.role != "Storekeeper":
+        return HttpResponse("Access is forbidden")
+    order = get_object_or_404(OrderTable, pk=order_id)
+    if request.method == "POST":
+        form = StOrderEdit(request.POST, instance=order)
+        form.save()
+        user_id = order.user.id
+        return redirect("manage_table", user_id)
+    else:
+        form = StOrderEdit(instance=order)
+    return render(request, "supply/st_edit.html", {"form": form, "order": order})
