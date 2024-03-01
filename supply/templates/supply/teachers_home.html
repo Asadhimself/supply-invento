@@ -47,7 +47,7 @@
             <td>{{order.quantity}}</td>
             <td>{{order.measurement}}</td>
             <td>{{order.delivered_quantity}}</td>
-            <td class="comment-cell">{{order.teachers_comment}}</td>
+            <td class="comment-cell">{{order.teachers_comments}}</td>
             <td class="status-cell">
               <div class="status-box">
                 <p class="status status-pending">{{order.status}}</p>
@@ -56,7 +56,7 @@
             <td class="sm-comment-cell">{{order.sm_comment}}</td>
             <td>
               <div class="action-box">
-                <a href="#" class="action-link">
+                <a href="{% url 'edit_order' order.id %}" class="action-link">
                   <img src="{% static 'assets/edit-64.png' %}" alt="edit button">
                 </a>
                 <a href="#" class="action-link">

@@ -1,0 +1,40 @@
+{% extends 'supply/base.html' %}
+{% load static %}
+{% block title %}Edit Order{% endblock title %}
+{% block head %}
+<link rel="stylesheet" href="{% static '/css/add_order.css' %}">
+{% endblock head %}
+{% block content %}
+  <form id="form" class="add-order-container" method="post">
+    {% csrf_token %}
+    <div class="add-order-subcontainer">
+      <div class="headline">
+        <img src="{% static 'assets/invento_logo.png' %}" alt="school logo" class="headline-logo">
+        <h1 class="title">Edit Item</h1>
+      </div>
+      <div class="input-control">
+          <input id="item" name="name" type="text" placeholder="Item" value="{{order.name}}">
+          <div class="error"></div>
+      </div>
+      <div class="input-control">
+          <input id="image_link" name="image_url" type="text" placeholder="Image link" value="{{order.image_url}}">
+          <div class="error"></div>
+      </div>
+      <div class="input-control">
+          <input id="quantity" name="quantity" type="number" placeholder="Quantity" value="{{order.quantity}}">
+          <div class="error"></div>
+      </div>
+      <div class="input-control">
+          <input id="measurement" name="measurement" type="text" placeholder="Measurement" value="{{order.measurement}}">
+          <div class="error"></div>
+      </div>
+      <div class="input-control">
+        <input id="comments" name="teachers_comments" type="text" placeholder="Comments" value="{{order.teachers_comments}}">
+        <div class="error"></div>
+      </div>
+      <button type="submit" class="submit_btn" name="submit">Edit Order</button>
+    </div>
+  </form>
+
+
+{% endblock content %}
