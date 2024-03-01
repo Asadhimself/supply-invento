@@ -40,13 +40,13 @@ class CustomUserAdmin(UserAdmin):
     ordering = ("email",)
     def get_user_info(self, obj):
         if obj.user_class:
-            return f"{obj.first_name} {obj.last_name} ({obj.user_class})"
+            return f"{obj.first_name} {obj.last_name}"
         else:
             return f"{obj.first_name} {obj.last_name} ({obj.role})"
         
 
 class OrderTableAdmin(admin.ModelAdmin):
-    readonly_fields = ('user', 'order_date')
+    readonly_fields = ('order_date', )
     list_display = ('name', 'user', 'get_photo', 'status')
     list_filter = ('status', )
     search_fields = ('user', )

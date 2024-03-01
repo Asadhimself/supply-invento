@@ -1,0 +1,97 @@
+{% extends 'supply/base.html' %}
+
+{% load static %}
+
+{% block title %}
+  {{teacher}}
+{% endblock title %}
+
+{% block head %}
+  <link rel="stylesheet" href="{% static '/css/table.css' %}" />
+  <link rel="stylesheet" href="{% static '/css/add_order.css' %}" />
+{% endblock %}
+
+{% block content %}
+  <main>
+    <div class="main-subcontainer">
+      <div class="options">
+        <p class="teachers-name">{{ teacher }}</p>
+        <a href="#" class="archive-link">Archive</a>
+        <label for="show" class="show-label">Show rows:</label>
+        <select name="show" id="show">
+          <option value="25">25</option>
+          <option value="50">50</option>
+          <option value="100">100</option>
+        </select>
+      </div>
+      <div class="tab">
+        <button class="tablinks active-tab" onclick="filterTable('all', event)">All</button>
+        <button class="tablinks" onclick="filterTable('pending', event)">Pending</button>
+        <button class="tablinks" onclick="filterTable('partial', event)">Partial</button>
+        <button class="tablinks" onclick="filterTable('full', event)">Full</button>
+
+        <div class="searchbox">
+          <input type="text" name="search" id="search" class="search-input" placeholder="Search..." />
+          <button type="submit" class="search-btn"><img src="{% static '/assets/search-96.png' %}" alt="search icon" /></button>
+        </div>
+      </div>
+      <table id="original-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Item</th>
+            <th>Image</th>
+            <th>Quantity</th>
+            <th>Measurement</th>
+            <th>Delivered</th>
+            <th>Teachers Comments</th>
+            <th>Price</th>
+            <th>Teacher Received</th>
+            <th>ST Comments</th>
+            <th>SM Comments</th>
+            <th>Order Date</th>
+            <th>Receipt Date</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for order in orders %}
+          <tr>
+            <td>{{order.id}}</td>
+            <td class="item-cell">{{order.name}}</td>
+            <td>
+              <div class="table-image">
+                <img src="{{order.image_url}}" alt="" />
+              </div>
+            </td>
+            <td>{{order.quantity}}</td>
+            <td>{{order.measurement}}</td>
+            <td>{{order.delivered_quantity}}</td>
+            <td class="comment-cell">{{order.teachers_comments}}</td>
+            <td>{{order.price}}</td>
+            <td>{{order.teacher_recieved}}</td>
+            <td class="sm-comment-cell">{{order.st_comments}}</td>
+            <td class="sm-comment-cell">{{order.sm_comments}}</td>
+            <td>{{order.order_date|date:"d.m.Y"}}</td>
+            <td>{{order.date_of_reciept}}</td>
+            <td class="status-cell">
+              <div class="status-box">
+                <p class="status status-pending">{{order.status}}</p>
+              </div>
+            </td>
+            <td>
+              <div class="action-box">
+                <a href="#" class="action-link"><img src="{% static '/assets/edit-64.png' %}" alt="edit button" /></a>
+                <a href="#" class="action-link"><img src="{% static '/assets/delete-64.png' %}" alt="delete button" /></a>
+              </div>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  <script src="{% static 'js/table.js' %}"></script>
+{% endblock %}

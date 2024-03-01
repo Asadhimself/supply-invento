@@ -1,57 +1,63 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{%block title%}{% endblock %}</title>
-  <link rel="stylesheet" href="{% static "css/main.css" %}">
-  {% block head %} {% endblock %}
-</head>
-<header>
-  <nav>
-    <div class="nav-item">
-      <a href="{% url 'profile' user.id %}" class="nav-link">
-        {% with 'assets/'|add:user.role|add:'.png'|lower as image_static %}
-        <img src="{% static image_static %}" alt="role logo">
-        {% endwith %}
-        <p>{{user.first_name}} {{user.last_name}}
-          {% if user.user_class %}
-          ({{user.user_class}})
-          {% endif %}
-        </p>
-      </a>
-    </div>  
-    <div class="nav-item">
-      <a href="{% url 'home' %}" class="nav-link">
-        <img src="{% static 'assets/icons8-home-96.png' %}" alt="home">
-        <p>Home</p>
-      </a>
-    </div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      {% block title %}
 
-    {% if user.is_staff %}
-    <div class="nav-item">
-      <a href="{% url 'admin:index' %}" class="nav-link">
-        <img src="{% static 'assets/icons8-home-96.png' %}" alt="home">
-        <p>Admin Panel</p>
-      </a>
-    </div>
-    {% endif %}
+      {% endblock %}
+    </title>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}" />
+    {% block head %}
 
+    {% endblock %}
+  </head>
+  <body>
+    <header>
+      <nav>
+        <div class="nav-item">
+          <a href="{% url 'profile' user.id %}" class="nav-link">
+            {% with 'assets/'|add:user.role|add:'.png'|lower as image_static %}
+              <img src="{% static image_static %}" alt="role logo" />
+            {% endwith %}
+            <p>{{ user.first_name }} {{ user.last_name }}</p>
+          </a>
+        </div>
+        <div class="nav-item">
+          <a href="{% url 'home' %}" class="nav-link">
+            <img src="{% static 'assets/icons8-home-96.png' %}" alt="home" />
+            <p>Home</p>
+          </a>
+        </div>
 
-    <div class="nav-item">
-      <a href="{% url 'profile' user.id %}" class="nav-link">
-        <img src="{% static 'assets/icons8-account-96.png' %}" alt="profile">
-        <p>{{user.email}}</p>
-      </a>
-    </div>
-    <div class="nav-item">
-      <a href="{% url 'logout' %}" class="nav-link">
-        <img src="{% static 'assets/icons8-logout-96.png' %}" alt="logout">
-        <p>Logout</p>
-      </a>
-    </div>
-  </nav>
-</header>
+        {% if user.is_staff %}
+          <div class="nav-item">
+            <a href="{% url 'admin:index' %}" class="nav-link">
+              <img src="{% static 'assets/icons8-home-96.png' %}" alt="home" />
+              <p>Admin Panel</p>
+            </a>
+          </div>
+        {% endif %}
 
-  {% block content %} {% endblock %}
+        <div class="nav-item">
+          <a href="{% url 'profile' user.id %}" class="nav-link">
+            <img src="{% static 'assets/icons8-account-96.png' %}" alt="profile" />
+            <p>{{ user.email }}</p>
+          </a>
+        </div>
+        <div class="nav-item">
+          <a href="{% url 'logout' %}" class="nav-link">
+            <img src="{% static 'assets/icons8-logout-96.png' %}" alt="logout" />
+            <p>Logout</p>
+          </a>
+        </div>
+      </nav>
+    </header>
+
+    {% block content %}
+
+    {% endblock %}
+  </body>
+</html>

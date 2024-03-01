@@ -160,3 +160,9 @@ nav {
 .section-link:hover {
   background-color: #3c3c8f;
 }
+
+.login-error {
+  color: rgb(230, 83, 83);
+  font-size: 0.8rem;
+  font-weight: 600s;
+}

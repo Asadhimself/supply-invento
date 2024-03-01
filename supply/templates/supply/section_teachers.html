@@ -1,0 +1,33 @@
+{% extends 'supply/base.html' %}
+{% load static %}
+
+{% block title %}
+  {{ class }}
+{% endblock %}
+
+{% block head %}
+  <link rel="stylesheet" href="{% static '/css/table.css' %}" />
+{% endblock %}
+
+{% block content %}
+  <main class="section-container width-60">
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th class="width-15">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for teacher in teachers %}
+        <tr>
+          <td>{{teacher.first_name}} {{teacher.last_name}}</td>
+          <td>
+            <a href="{% url "sm_table" teacher.id %}" class="section-link">Go</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </main>
+{% endblock %}

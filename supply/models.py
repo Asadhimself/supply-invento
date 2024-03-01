@@ -58,10 +58,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     objects = CustomUserManager()
 
     def __str__(self):
-        user_class = self.user_class
-        if user_class is None:
-            user_class = self.role
-        return f"{self.first_name} {self.last_name} ({user_class})"
+        return f"{self.first_name} {self.last_name}"
     
     def has_perm(self, perm, obj=None):
         "Does the user have a specific permission?"

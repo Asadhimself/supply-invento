@@ -1,0 +1,20 @@
+{% extends 'supply/base.html' %}
+
+{% load static %}
+
+{% block title %}
+  Welcome, Supplier!
+{% endblock %}
+
+{% block content %}
+  <main class="section-container">
+    <div class="section-subcontainer">
+      <h2>Select section</h2>
+      <div class="links-container">
+        {% for class in classes %}
+        <a href="{% url 'section' class %}" class="section-link">{{class}}</a>
+        {% endfor %}
+      </div>
+    </div>
+  </main>
+{% endblock %}
