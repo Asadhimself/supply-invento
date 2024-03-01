@@ -11,18 +11,36 @@
 <header>
   <nav>
     <div class="nav-item">
-    {% with 'assets/'|add:user.role|add:'.png'|lower as image_static %}
-      <img src="{% static image_static %}" alt="role logo">
-    {% endwith %}
-    </div>
+      <a href="{% url 'profile' user.id %}" class="nav-link">
+        {% with 'assets/'|add:user.role|add:'.png'|lower as image_static %}
+        <img src="{% static image_static %}" alt="role logo">
+        {% endwith %}
+        <p>{{user.first_name}} {{user.last_name}}
+          {% if user.user_class %}
+          ({{user.user_class}})
+          {% endif %}
+        </p>
+      </a>
+    </div>  
     <div class="nav-item">
       <a href="{% url 'home' %}" class="nav-link">
         <img src="{% static 'assets/icons8-home-96.png' %}" alt="home">
         <p>Home</p>
       </a>
     </div>
+
+    {% if user.is_staff %}
     <div class="nav-item">
-      <a href="#" class="nav-link">
+      <a href="{% url 'admin:index' %}" class="nav-link">
+        <img src="{% static 'assets/icons8-home-96.png' %}" alt="home">
+        <p>Admin Panel</p>
+      </a>
+    </div>
+    {% endif %}
+
+
+    <div class="nav-item">
+      <a href="{% url 'profile' user.id %}" class="nav-link">
         <img src="{% static 'assets/icons8-account-96.png' %}" alt="profile">
         <p>{{user.email}}</p>
       </a>

@@ -26,6 +26,8 @@ class CustomUserManager(BaseUserManager):
 
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
+    first_name = models.CharField(max_length=20)
+    last_name = models.CharField(max_length=20)
     email = models.EmailField(unique=True)
     role = models.CharField(
         max_length=20,
@@ -56,7 +58,10 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     objects = CustomUserManager()
 
     def __str__(self):
-        return f"{self.email} - {self.role}"
+        user_class = self.user_class
+        if user_class is None:
+            user_class = self.role
+        return f"{self.first_name} {self.last_name} ({user_class})"
     
     def has_perm(self, perm, obj=None):
         "Does the user have a specific permission?"
@@ -91,4 +96,7 @@ class OrderTable(models.Model):
         ("Fully recieved", "Order is fully recieved to teacher"),
     ]
     status = models.CharField(max_length=25, choices=STATUS, default=STATUS[0][0])
-    customer = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+
+    def __str__(self) -> str:
+        return f"{self.name}"

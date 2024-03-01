@@ -1,8 +1,8 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.http import HttpRequest
+from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
-from .models import OrderTable, CustomUser
+from .models import CustomUser, OrderTable
 from .forms import OrderForm
 
 
@@ -36,11 +36,12 @@ def home_view(request):
     #     admin_url = reverse("admin:index")
     #     return redirect(admin_url)
     if request.user.role == "Teacher":
-        table = OrderTable.objects.filter(customer=request.user)
+        table = OrderTable.objects.filter(user=request.user)
+        for order in table:
+            order.status = order.status.split()[0]
         table = list(enumerate(table, start=1))
-        email = request.user.email
         return render(
-            request, "supply/teachers_home.html", {"table": table, "email": email}
+            request, "supply/teachers_home.html", {"table": table}
         )
     return render(request, "supply/home.html")
 
@@ -51,7 +52,7 @@ def add_order_view(request):
         form = OrderForm(request.POST)
         if form.is_valid():
             order = form.save(commit=False)
-            order.customer = request.user
+            order.user = request.user
             order.save()
         return redirect("home")
     else:
@@ -63,8 +64,8 @@ def add_order_view(request):
 @login_required(login_url="/login")
 def edit_order_view(request, order_id):
     order = get_object_or_404(OrderTable, pk=order_id)
-    if order.customer != request.user:
-        return render(HttpRequest("Acces is forbidden"))
+    if order.user != request.user:
+        return render(HttpResponse("Acces is forbidden"))
     if request.method == "POST":
         form = OrderForm(request.POST, instance=order)
         if form.is_valid():
@@ -74,3 +75,21 @@ def edit_order_view(request, order_id):
         form = OrderForm(instance=order)
 
     return render(request, 'supply/edit_order.html', {"form": form, 'order': order})
+
+@login_required(login_url='/login')
+def delete_order_view(request, order_id):
+    order = get_object_or_404(OrderTable, pk=order_id)
+    if request.user != order.user:
+        return render(HttpResponse("Access is forbidden"))
+    if request.method == 'POST' or request.method == "GET":
+        order.delete()
+        return redirect('home')
+    
+@login_required(login_url='/login')
+def profile_view(request, user_id):
+    if request.user.id == user_id:
+        user = CustomUser.objects.get(id=user_id)
+        return render(request, "supply/profile.html", {"user": user})
+    else:
+        return HttpResponse("Access is forbidden")
+    

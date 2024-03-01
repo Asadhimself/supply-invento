@@ -6,14 +6,15 @@ from .models import CustomUser, OrderTable
 class CustomUserCreationForm(UserCreationForm):
     class Meta:
         models = CustomUser
-        fields = ("email",)
+        fields = ("first_name", "last_name", "email",)
 
 
 class CustomUserChangeForm(UserChangeForm):
     class Meta:
         model = CustomUser
-        fields = ("email",)
-
+        fields = ("first_name", "last_name", "email",)
+        
+        
 class OrderForm(forms.ModelForm):
     class Meta:
         model = OrderTable

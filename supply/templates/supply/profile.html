@@ -1,0 +1,36 @@
+{% extends 'supply/base.html' %}
+{% load static %}
+
+
+{% block head %}
+  <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+{% endblock %}
+
+{% block title %}Supply - {{user.email}}{% endblock %}
+
+{% block content %}
+
+<main class="profile-container">
+  <div class="profile-subcontainer">
+    <div class="left">
+      <div class="left-subcontainer">
+        {% with 'assets/'|add:user.role|add:'.png'|lower as image_static %}
+          <img class="left-image" src="{% static image_static %}" alt="role logo" />
+        {% endwith %}
+        <h1>{{ user.role }}</h1>
+      </div>
+    </div>
+    <div class="right">
+      <div class="right-item">
+        <p class="description">Name:</p>
+        <p class="content">{{ user.first_name }} {{ user.last_name }}</p>
+      </div>
+      <div class="right-item">
+        <p class="description">Email:</p>
+        <p class="content">{{ user.email }}</p>
+      </div>
+    </div>
+  </div>
+</main>
+
+{% endblock %}

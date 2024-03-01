@@ -59,7 +59,7 @@
                 <a href="{% url 'edit_order' order.id %}" class="action-link">
                   <img src="{% static 'assets/edit-64.png' %}" alt="edit button">
                 </a>
-                <a href="#" class="action-link">
+                <a href="{% url 'delete_order' order.id %}" class="action-link">
                   <img src="{% static 'assets/delete-64.png' %}" alt="delete button">
                 </a>
               </div>
