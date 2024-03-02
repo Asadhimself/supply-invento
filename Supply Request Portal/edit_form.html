@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit</title>
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/add_order.css">
+  <link rel="stylesheet" href="/css/table.css">
+</head>
+<body>
+
+  <header>
+    <nav>
+      <div class="nav-item">
+          <img src="/assets/supplier.png" alt="role logo">
+      </div>
+      <div class="nav-item">
+        <a href="#" class="nav-link">
+          <img src="/assets/icons8-home-96.png" alt="home">
+          <p>Home</p>
+        </a>
+      </div>
+      <div class="nav-item">
+        <a href="#" class="nav-link">
+          <img src="/assets/icons8-account-96.png" alt="profile">
+          <p>Profile</p>
+        </a>
+      </div>
+      <div class="nav-item">
+        <a href="#" class="nav-link">
+          <img src="/assets/icons8-logout-96.png" alt="logout">
+          <p>Logout</p>
+        </a>
+      </div>
+    </nav>
+  </header>
+
+  <form id="form" class="add-order-container">
+    <div class="add-order-subcontainer">
+      <div class="headline">
+        <img src="/assets/invento_logo.png" alt="school logo" class="headline-logo">
+        <h1 class="title">Edit the item</h1>
+      </div>
+      <div class="input-control">
+        <label for="sm_comments">SM Comments</label>
+        <input id="sm_comments" name="sm_comments" type="text" placeholder="None">
+      </div>
+      <div class="input-control">
+        <label for="price">Price</label>
+        <input id="price" name="price" type="text" placeholder="None">
+        <div class="error"></div>
+      </div>
+      <div class="dropdown">
+        <label for="status">Status:</label> 
+        <select name="status" id="status"> 
+          <option value="pending">Pending</option> 
+          <option value="partial">Partial</option> 
+          <option value="full">Full</option>
+        </select>
+      </div>
+      <div class="buttons">
+        <button type="submit" id="cancel_btn" class="cancel_btn"><a href="javascript:history.back()">Cancel</a></button>
+        <button type="submit" class="submit_btn">Edit</button>
+      </div>
+    </div>
+  </form>
+
+</body>
+</html>

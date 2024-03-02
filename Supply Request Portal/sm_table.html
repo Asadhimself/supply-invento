@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home</title>
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/table.css">
+  <link rel="stylesheet" href="/css/add_order.css">
+</head>
+<body>
+
+  <header>
+    <nav>
+      <div class="nav-item">
+          <img src="/assets/supplier.png" alt="role logo">
+      </div>
+      <div class="nav-item">
+        <a href="#" class="nav-link">
+          <img src="/assets/icons8-home-96.png" alt="home">
+          <p>Home</p>
+        </a>
+      </div>
+      <div class="nav-item">
+        <a href="#" class="nav-link">
+          <img src="/assets/admin-96.png" alt="home">
+          <p>Admin</p>
+        </a>
+      </div>
+      <div class="nav-item">
+        <a href="#" class="nav-link">
+          <img src="/assets/icons8-account-96.png" alt="profile">
+          <p>Profile</p>
+        </a>
+      </div>
+      <div class="nav-item">
+        <a href="#" class="nav-link">
+          <img src="/assets/icons8-logout-96.png" alt="logout">
+          <p>Logout</p>
+        </a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <div class="main-subcontainer">
+      <div class="options">
+        <p class="teachers-name">Joe Biden</p>
+        <a href="#" class="archive-link">Archive</a>
+        <label for="show" class="show-label">Show rows:</label>
+        <select name="show" id="show">
+          <option value="25">25</option>
+          <option value="50">50</option>
+          <option value="100">100</option>
+        </select>
+      </div>
+      <div class="tab">
+        <button class="tablinks active-tab" onclick="filterTable('all', event)">All</button>
+        <button class="tablinks" onclick="filterTable('pending', event)">Pending</button>
+        <button class="tablinks" onclick="filterTable('partial', event)">Partial</button>
+        <button class="tablinks" onclick="filterTable('full', event)">Full</button>
+
+        <div class="searchbox">
+          <input type="text" name="search" id="search" class="search-input" placeholder="Search...">
+          <button type="submit" class="search-btn">
+            <img src="/assets/search-96.png" alt="search icon">
+          </button>
+        </div>
+      </div>
+      <table id="original-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Item</th>
+            <th>Image</th>
+            <th>Quantity</th>
+            <th>Measurement</th>
+            <th>Delivered</th>
+            <th>Teachers Comments</th>
+            <th>Price</th>
+            <th>Teacher Received</th>
+            <th>ST Comments</th>
+            <th>SM Comments</th>
+            <th>Order Date</th>
+            <th>Receipt Date</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>ID</td>
+            <td class="item-cell">Item</td>
+            <td>
+              <div class="table-image">
+                <img src="/assets/test_image.jpg" alt="">
+              </div>
+            </td>
+            <td>15</td>
+            <td>piece</td>
+            <td>test</td>
+            <td class="comment-cell">Just a comment</td>
+            <td>$105</td>
+            <td>15</td>
+            <td class="sm-comment-cell">All good</td>
+            <td class="sm-comment-cell">Confirm</td>
+            <td>25.02.2024</td>
+            <td>28.02.2024</td>
+            <td class="status-cell">
+              <div class="status-box">
+                <p class="status status-pending">Full</p>
+              </div>
+            </td>
+            <td>
+              <div class="action-box">
+                <a href="#" class="action-link">
+                  <img src="/assets/edit-64.png" alt="edit button">
+                </a>
+                <a href="#" class="action-link">
+                  <img src="/assets/delete-64.png" alt="delete button">
+                </a>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>ID</td>
+            <td class="item-cell">Item</td>
+            <td>
+              <div class="table-image">
+                <img src="/assets/test_image_2.jpg" alt="test image" onclick="fullsize(this)">
+              </div>
+            </td>
+            <td>15</td>
+            <td>piece</td>
+            <td>test</td>
+            <td class="comment-cell">Just a comment</td>
+            <td>$105</td>
+            <td>15</td>
+            <td class="sm-comment-cell">All good</td>
+            <td class="sm-comment-cell">Confirm</td>
+            <td>25.02.2024</td>
+            <td>28.02.2024</td>
+            <td class="status-cell">
+              <div class="status-box">
+                <p class="status status-pending">Partial</p>
+              </div>
+            </td>
+            <td>
+              <div class="action-box">
+                <a href="#" class="action-link">
+                  <img src="/assets/edit-64.png" alt="edit button">
+                </a>
+                <a href="#" class="action-link">
+                  <img src="/assets/delete-64.png" alt="delete button">
+                </a>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>ID</td>
+            <td class="item-cell">Item</td>
+            <td>
+              <div class="table-image">
+                <img src="/assets/teacher.png" alt="">
+              </div>
+            </td>
+            <td>15</td>
+            <td>piece</td>
+            <td>test</td>
+            <td class="comment-cell">Just a comment</td>
+            <td>$105</td>
+            <td>15</td>
+            <td class="sm-comment-cell">All good</td>
+            <td class="sm-comment-cell">Confirm</td>
+            <td>25.02.2024</td>
+            <td>28.02.2024</td>
+            <td class="status-cell">
+              <div class="status-box">
+                <p class="status status-pending">Pending</p>
+              </div>
+            </td>
+            <td>
+              <div class="action-box">
+                <a href="#" class="action-link">
+                  <img src="/assets/edit-64.png" alt="edit button">
+                </a>
+                <a href="#" class="action-link">
+                  <img src="/assets/delete-64.png" alt="delete button">
+                </a>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>ID</td>
+            <td class="item-cell">Item</td>
+            <td>
+              <div class="table-image">
+                <img src="/assets/teacher.png" alt="">
+              </div>
+            </td>
+            <td>15</td>
+            <td>piece</td>
+            <td>test</td>
+            <td class="comment-cell">Just a comment</td>
+            <td>$105</td>
+            <td>15</td>
+            <td class="sm-comment-cell">All good</td>
+            <td class="sm-comment-cell">Confirm</td>
+            <td>25.02.2024</td>
+            <td>28.02.2024</td>
+            <td class="status-cell">
+              <div class="status-box">
+                <p class="status status-pending">Pending</p>
+              </div>
+            </td>
+            <td>
+              <div class="action-box">
+                <a href="#" class="action-link">
+                  <img src="/assets/edit-64.png" alt="edit button">
+                </a>
+                <a href="#" class="action-link">
+                  <img src="/assets/delete-64.png" alt="delete button">
+                </a>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>ID</td>
+            <td class="item-cell">Item</td>
+            <td>
+              <div class="table-image">
+                <img src="/assets/teacher.png" alt="">
+              </div>
+            </td>
+            <td>15</td>
+            <td>piece</td>
+            <td>test</td>
+            <td class="comment-cell">Just a comment</td>
+            <td>$105</td>
+            <td>15</td>
+            <td class="sm-comment-cell">All good</td>
+            <td class="sm-comment-cell">Confirm</td>
+            <td>25.02.2024</td>
+            <td>28.02.2024</td>
+            <td class="status-cell">
+              <div class="status-box">
+                <p class="status status-pending">Full</p>
+              </div>
+            </td>
+            <td>
+              <div class="action-box">
+                <a href="#" class="action-link">
+                  <img src="/assets/edit-64.png" alt="edit button">
+                </a>
+                <a href="#" class="action-link">
+                  <img src="/assets/delete-64.png" alt="delete button">
+                </a>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>ID</td>
+            <td class="item-cell">Item</td>
+            <td>
+              <div class="table-image">
+                <img src="/assets/teacher.png" alt="">
+              </div>
+            </td>
+            <td>15</td>
+            <td>piece</td>
+            <td>test</td>
+            <td class="comment-cell">Just a comment</td>
+            <td>$105</td>
+            <td>15</td>
+            <td class="sm-comment-cell">All good</td>
+            <td class="sm-comment-cell">Confirm</td>
+            <td>25.02.2024</td>
+            <td>28.02.2024</td>
+            <td class="status-cell">
+              <div class="status-box">
+                <p class="status status-pending">Full</p>
+              </div>
+            </td>
+            <td>
+              <div class="action-box">
+                <a href="#" class="action-link">
+                  <img src="/assets/edit-64.png" alt="edit button">
+                </a>
+                <a href="#" class="action-link">
+                  <img src="/assets/delete-64.png" alt="delete button">
+                </a>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+
+      </table>
+    </div>
+
+  </main>
+
+  <script src="table.js"></script>
+</body>
+</html>
