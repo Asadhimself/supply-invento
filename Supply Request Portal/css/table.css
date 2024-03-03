@@ -129,6 +129,12 @@ tr:last-child td:last-child {
   width: 2rem;
 }
 
+.delete-item {
+  border: transparent;
+  background-color: transparent;
+  cursor: pointer;
+}
+
 .tab {
   display: flex;
   margin-left: 1rem;
