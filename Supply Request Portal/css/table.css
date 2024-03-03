@@ -291,3 +291,29 @@ th {
   width: 0.7rem;
   height: 0.8rem;
 }
+
+.zoomable-image {
+  cursor: pointer;
+}
+
+.zoomed-photo {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  z-index: 9999;
+  background-color: rgba(0, 0, 0, 0.9);
+}
+.zoomed-photo img {
+  max-width: 90%;
+  max-height: 90%;
+  display: block;
+  margin: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
