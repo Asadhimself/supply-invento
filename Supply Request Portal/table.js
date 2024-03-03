@@ -1,3 +1,32 @@
+// Zoom logic
+
+document.addEventListener('DOMContentLoaded', function() {
+  const zoomableImages = document.querySelectorAll('.zoomable-image');
+  const zoomedPhoto = document.querySelector('.zoomed-photo');
+  const zoomedImage = document.querySelector('.zoomed-image');
+  const closeBtn = document.querySelector('.close-btn');
+
+  zoomableImages.forEach(image => {
+    image.addEventListener('click', () => {
+      zoomedImage.src = image.src;
+      zoomedPhoto.style.display = 'block';
+    });
+  });
+
+  closeBtn.addEventListener('click', () => {
+    zoomedPhoto.style.display = 'none';
+  });
+
+  // Close the zoomed photo when clicking anywhere outside of it
+  document.addEventListener('click', function(event) {
+    if (event.target === zoomedPhoto || event.target === zoomedImage) {
+      zoomedPhoto.style.display = 'none';
+    }
+  });
+});
+
+// Delete confirm logic
+
 var deleteButtons = document.querySelectorAll('.delete-item');
 
 // Get confirmation box and buttons
