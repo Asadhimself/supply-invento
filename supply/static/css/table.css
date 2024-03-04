@@ -52,7 +52,6 @@ tr:last-child td:last-child {
 }
 
 .table-image {
-  margin: 0 auto;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -66,6 +65,10 @@ tr:last-child td:last-child {
 .table-image > img {
   width: 100%;
   height: auto;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  transform: scale(1.5);
 }
 
 .item-cell {
@@ -99,8 +102,8 @@ tr:last-child td:last-child {
 }
 
 .status-partial {
-  background-color: orange;
-  color: rgb(69, 49, 0);
+  background-color: rgb(191, 124, 0);
+  color: white;
 }
 
 .status-pending {
@@ -124,6 +127,12 @@ tr:last-child td:last-child {
 
 .action-box img {
   width: 2rem;
+}
+
+.delete-item {
+  border: transparent;
+  background-color: transparent;
+  cursor: pointer;
 }
 
 .tab {
@@ -213,4 +222,104 @@ select {
 
 .date-box:focus {
   outline: none;
+}
+
+.confirmation-box {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  border-radius: 0.5rem;
+  border: 1px solid #ababab;
+  padding: 2rem;
+  box-shadow: 0 0 1rem #909090;
+  z-index: 9999;
+}
+
+.confirmation-content {
+  text-align: center;
+}
+
+.confirm-buttons {
+  width: 10rem;
+  margin: 1rem auto 0;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.confirm-btn, .cancel-btn {
+  padding: 0.5rem 1rem;
+  min-width: 5rem;
+  cursor: pointer;
+  border-radius: 0.5rem;
+  font-weight: 700;
+}
+
+.confirmation-content a {
+  text-decoration: none;
+}
+
+.confirm-btn {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+}
+
+.cancel-btn {
+  background-color: #ccc;
+  color: #545454;
+  border: none;
+}
+
+.hide {
+  display: none;
+}
+
+th {
+  cursor: pointer;
+  -ms-user-select: none;
+  -moz-user-select: none; /* Firefox */
+  -webkit-user-select: none; /* Safari and Chrome */
+  user-select: none; /* IE 10+ */
+}
+
+.table-header-element {
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sort-icon {
+  width: 0.7rem;
+  height: 0.8rem;
+}
+
+.zoomable-image {
+  cursor: pointer;
+}
+
+.zoomed-photo {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  z-index: 9999;
+  background-color: rgba(0, 0, 0, 0.9);
+}
+.zoomed-photo img {
+  max-width: 90%;
+  max-height: 90%;
+  display: block;
+  margin: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }

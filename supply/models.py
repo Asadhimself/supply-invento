@@ -1,5 +1,5 @@
 from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
-from django.contrib.auth.models import AbstractUser, PermissionsMixin
+from django.contrib.auth.models import PermissionsMixin
 from django.db import models
 
 
@@ -81,7 +81,7 @@ class OrderTable(models.Model):
     measurement = models.CharField(max_length=25)
     delivered_quantity = models.PositiveIntegerField(blank=True, null=True)
     teachers_comments = models.TextField(null=True, blank=True)
-    price = models.PositiveIntegerField(blank=True, null=True)
+    price = models.CharField(max_length=15, blank=True, null=True)
     teacher_recieved = models.PositiveIntegerField(blank=True, null=True)
     st_comments = models.TextField(null=True, blank=True)
     sm_comments = models.TextField(null=True, blank=True)

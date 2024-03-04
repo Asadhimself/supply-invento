@@ -161,8 +161,31 @@ nav {
   background-color: #3c3c8f;
 }
 
-.login-error {
-  color: rgb(230, 83, 83);
-  font-size: 0.8rem;
-  font-weight: 600s;
+.denied {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  min-height: 90vh;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.denied > img {
+  width: 250px;
+  height: auto;
+}
+
+.denied-message {
+  text-align: center;
+}
+
+.denied h3 {
+  font-size: 5rem;
+  font-weight: 900;
+  line-height: 0.8;
+}
+
+.denied h4 {
+  font-size: 2rem;
 }

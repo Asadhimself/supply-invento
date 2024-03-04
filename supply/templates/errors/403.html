@@ -1,0 +1,26 @@
+{% extends "supply/base.html" %}
+
+{% block title %}
+
+403 Acces denied!
+
+{% endblock title %}
+
+
+{% block head %}
+
+<link rel="stylesheet" href="{% static "css/profile.css" %}">
+
+{% endblock head %}
+
+
+{% block content %}
+  <div class="denied">
+    <div class="denied-message">
+      <h3>403</h3>
+      <h4>Access denied!</h4>
+    </div>
+    <img src="{% static 'assets/denied.png' %}" alt="denied">
+  </div>
+
+{% endblock content %}

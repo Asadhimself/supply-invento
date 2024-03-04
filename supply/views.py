@@ -1,7 +1,8 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.http import Http404, HttpResponse
+from django.http import Http404, HttpResponse, HttpResponseForbidden
 from django.shortcuts import get_object_or_404, redirect, render
+from django.urls import reverse
 from .models import CustomUser, OrderTable
 from .forms import OrderForm, SmOrderEdit, StOrderEdit
 
@@ -32,9 +33,9 @@ def logout_view(request):
 
 @login_required(login_url="/login")
 def home_view(request):
-    # if request.user.is_staff:
-    #     admin_url = reverse("admin:index")
-    #     return redirect(admin_url)
+    if request.user.is_staff:
+        admin_url = reverse("admin:index")
+        return redirect(admin_url)
     if request.user.role == "Teacher":
         table = OrderTable.objects.filter(user=request.user)
         for order in table:
@@ -66,7 +67,7 @@ def add_order_view(request):
 def edit_order_view(request, order_id):
     order = get_object_or_404(OrderTable, pk=order_id)
     if order.user != request.user:
-        return render(HttpResponse("Acces is forbidden"))
+        return HttpResponseForbidden()
     if request.method == "POST":
         form = OrderForm(request.POST, instance=order)
         if form.is_valid():
@@ -118,7 +119,9 @@ def manage_teachers_table(request, user_id):
         order.status = order.status.split()[0]
     teacher = CustomUser.objects.get(id=user_id)
     return render(
-        request, "supply/manage_teachers_table.html", {"orders": orders, "teacher": teacher}
+        request,
+        "supply/manage_teachers_table.html",
+        {"orders": orders, "teacher": teacher},
     )
 
 
@@ -150,3 +153,17 @@ def st_edit_view(request, order_id):
     else:
         form = StOrderEdit(instance=order)
     return render(request, "supply/st_edit.html", {"form": form, "order": order})
+
+
+@login_required(login_url="/login")
+def manage_delete_order_view(request, order_id):
+    order = get_object_or_404(OrderTable, pk=order_id)
+    order_user_id = order.user.id
+    if request.user.role in ["Supplier", "Storekeeper"]:
+        if request.method == "POST" or request.method == "GET":
+            order.delete()
+            return redirect("manage_table", order_user_id)
+        
+
+def custom_403(request, exception):
+    return render(request, "errors/403.html", status=403)

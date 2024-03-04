@@ -109,6 +109,38 @@ label {
   color: #004b23;
 }
 
+.cancel_btn {
+  width: 10rem;
+  text-align: center;
+  margin: 0.5rem auto 0;
+  border-radius: 1rem;
+  border: transparent;
+  padding: 0.5rem;
+  font-size: 1rem;
+  font-weight: 900;
+  background-color: #8e8e8e;
+  cursor: pointer;
+  transition: all 0.1s ease;
+}
+
+.cancel_btn:hover {
+  background-color: #7b7b7b;
+  color: white;
+}
+
+.buttons {
+  margin-top: 3rem;
+}
+
+.buttons a {
+  text-decoration: none;
+  color: white;
+}
+
+.buttons a:visited {
+  color: white;
+}
+
 .login_button:hover {
   width: 12rem;
 }
