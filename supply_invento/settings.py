@@ -78,14 +78,14 @@ WSGI_APPLICATION = "supply_invento.wsgi.application"
 
 DATABASES = {
     "default": {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
-        'USER': 'postgres',
-        'PASSWORD': '',
-        'HOST': 'localhost',
-        'PORT': '5432',
-        # 'ENGINE': 'django.db.backends.sqlite3',                 #SQLite DB for demo purposes
-        # 'NAME': BASE_DIR / 'db.sqlite3',
+        # 'ENGINE': 'django.db.backends.postgresql',            #main database settings
+        # 'NAME': 'postgres',
+        # 'USER': 'postgres',
+        # 'PASSWORD': '',
+        # 'HOST': 'localhost',
+        # 'PORT': '5432',
+        'ENGINE': 'django.db.backends.sqlite3',                 #SQLite DB for demo purposes
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
