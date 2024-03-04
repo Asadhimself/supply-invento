@@ -32,7 +32,10 @@
         <input id="comments" name="teachers_comments" type="text" placeholder="Comments" value="{{order.teachers_comments}}">
         <div class="error"></div>
       </div>
-      <button type="submit" class="submit_btn" name="submit">Edit Order</button>
+      <div class="buttons">
+        <button type="submit" class="submit_btn">Edit Order</button>
+        <button type="submit" id="cancel_btn" class="cancel_btn"><a href="javascript:history.back()">Cancel</a></button>
+      </div>
     </div>
   </form>
 

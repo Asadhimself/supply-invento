@@ -26,25 +26,26 @@ Edit
     <div class="input-control">
       <label for="in_stock">In Stock</label>
       {% if order.in_stock is not None %}
-      <input id="price" name="in_stock" type="text" placeholder="None" value="{{order.in_stock}}" />
+      <input id="price" name="in_stock" type="number" placeholder="None" value="{{order.in_stock}}" />
       {% else %}
-      <input id="price" name="in_stock" type="text" placeholder="No in stock set" />
+      <input id="price" name="in_stock" type="number" placeholder="No in stock set" />
       {% endif %}
       <div class="error"></div>
     </div>
     <div class="input-control">
       <label for="teacher_recieved">Teacher Recieved</label>
       {% if order.teacher_recieved is not None %}
-      <input id="price" name="teacher_recieved" type="text" placeholder="None" value="{{order.teacher_recieved}}" />
+      <input id="price" name="teacher_recieved" type="number" placeholder="None" value="{{order.teacher_recieved}}" />
       {% else %}
-      <input id="price" name="teacher_recieved" type="text" placeholder="Teacher not recieved yet" />
+      <input id="price" name="teacher_recieved" type="number" placeholder="Teacher not recieved yet" />
       {% endif %}
       <div class="error"></div>
     </div>
     <div class="input-control">
       <label for="delivered_quantity">Delivered Quantity</label>
       {% if order.delivered_quantity is not None %}
-      <input id="price" name="delivered_quantity" type="number" placeholder="None" value="{{order.delivered_quantity}}" />
+      <input id="price" name="delivered_quantity" type="number" placeholder="None"
+        value="{{order.delivered_quantity}}" />
       {% else %}
       <input id="price" name="delivered_quantity" type="number" placeholder="Nothing delivered yet" />
       {% endif %}
@@ -68,7 +69,10 @@ Edit
         {% endif %}
       </select>
     </div>
-    <button type="submit" class="submit_btn">Edit</button>
+    <div class="buttons">
+      <button type="submit" class="submit_btn">Edit</button>
+      <button type="submit" id="cancel_btn" class="cancel_btn"><a href="javascript:history.back()">Cancel</a></button>
+    </div>
   </div>
 </form>
 {% endblock %}

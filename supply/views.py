@@ -163,7 +163,7 @@ def manage_delete_order_view(request, order_id):
         if request.method == "POST" or request.method == "GET":
             order.delete()
             return redirect("manage_table", order_user_id)
-        
+
 
 def custom_403(request, exception):
     return render(request, "errors/403.html", status=403)

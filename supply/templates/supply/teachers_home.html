@@ -102,9 +102,9 @@
               <a href="{% url 'edit_order' order.id %}" class="action-link">
                 <img src="{% static 'assets/edit-64.png' %}" alt="edit button">
               </a>
-              <a href="#" class="action-link delete-item">
-                <img src="{% static 'assets/delete-64.png' %}" alt="delete button">
-              </a>
+                <button class="action-link delete-item">
+                  <img src="{% static 'assets/delete-64.png' %}" alt="delete button">
+                </button>
             </div>
           </td>
           <div class="confirmation-box">
@@ -112,7 +112,7 @@
               <p>Are you sure you want to delete this item?</p>
               <div class="confirm-buttons">
                 <a href="{% url 'delete_order' order.id %}" class="confirm-btn">Yes</a>
-                <a href="#" class="cancel-btn">No</a>
+                <button class="cancel-btn">No</button>
               </div>
             </div>
           </div>

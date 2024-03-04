@@ -40,7 +40,10 @@ Edit
         <option value="Fully recieved">Full</option>
       </select>
     </div>
-    <button type="submit" class="submit_btn">Edit</button>
+    <div class="buttons">
+      <button type="submit" class="submit_btn">Edit</button>
+      <button type="submit" id="cancel_btn" class="cancel_btn"><a href="javascript:history.back()">Cancel</a></button>
+    </div>
   </div>
 </form>
 {% endblock %}
