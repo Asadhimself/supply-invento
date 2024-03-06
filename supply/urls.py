@@ -13,6 +13,8 @@ from supply.views import (
     section_view,
     sm_edit_view,
     st_edit_view,
+    teacher_archive_view,
+    manage_archive_view
 )
 
 
@@ -28,7 +30,9 @@ urlpatterns = [
     path("manage_table/<int:user_id>", manage_teachers_table, name="manage_table"),
     path("sm_edit/<int:order_id>", sm_edit_view, name="sm_edit"),
     path("st_edit/<int:order_id>", st_edit_view, name="st_edit"),
-    path("manage_delete/<int:order_id>", manage_delete_order_view, name="manage_delete")
+    path("manage_delete/<int:order_id>", manage_delete_order_view, name="manage_delete"),
+    path("archive/", teacher_archive_view, name="teacher_archive"),
+    path("archive/<int:user_id>", manage_archive_view, name="manage_archive"),
 ]
 
 handler403 = "supply.views.custom_403"

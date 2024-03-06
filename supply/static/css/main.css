@@ -115,6 +115,15 @@ nav {
   background-color: #565656;
 }
 
+.active-link {
+  background-color: #52b788;
+  color: white;
+}
+
+.active-link:hover {
+  background-color: #57cc99;
+}
+
 .options > a {
   padding: 0.5rem 0.8rem;
   border-radius: 0.8rem;

@@ -1,0 +1,196 @@
+{% extends "supply/base.html" %}
+{% load static %}
+{% block title %}Supply Invento{% endblock %}
+{% block head %}
+  <link rel="stylesheet" href="{% static 'css/table.css' %}">
+  <link rel="stylesheet" href="{% static 'css/add_order.css' %}">
+{% endblock head %}
+{% block content %}
+  <main>
+    <div class="main-subcontainer">
+      <div class="options">
+        <a href="{% url 'home' %}" class="active-link">Active</a>
+      </div>
+      <div class="tab">
+        <button class="tablinks active-tab" onclick="filterTable('all', event)">All</button>
+        <button class="tablinks" onclick="filterTable('pending', event)">Pending</button>
+        <button class="tablinks" onclick="filterTable('partial', event)">Partial</button>
+        <button class="tablinks" onclick="filterTable('full', event)">Full</button>
+      </div>
+      <table id="original-table">
+        <thead>
+          <tr>
+            <th onclick="sortTable(0)">
+              <div class="table-header-element">
+                <p>ID</p>
+                <img src="{% static '/assets/sort_icon.png' %}"
+                     alt="sort icon"
+                     class="sort-icon">
+              </div>
+            </th>
+            <th onclick="sortTable(1)">
+              <div class="table-header-element">
+                <p>Item</p>
+                <img src="{% static '/assets/sort_icon.png' %}"
+                     alt="sort icon"
+                     class="sort-icon">
+              </div>
+            </th>
+            <th>Image</th>
+            <th onclick="sortTable(2)">
+              <div class="table-header-element">
+                <p>Quantity</p>
+                <img src="{% static '/assets/sort_icon.png' %}"
+                     alt="sort icon"
+                     class="sort-icon">
+              </div>
+            </th>
+            <th onclick="sortTable(3)">
+              <div class="table-header-element">
+                <p>Measurement</p>
+                <img src="{% static '/assets/sort_icon.png' %}"
+                     alt="sort icon"
+                     class="sort-icon">
+              </div>
+            </th>
+            <th onclick="sortTable(4)">
+              <div class="table-header-element">
+                <p>Delivered</p>
+                <img src="{% static '/assets/sort_icon.png' %}"
+                     alt="sort icon"
+                     class="sort-icon">
+              </div>
+            </th>
+            <th onclick="sortTable(5)">
+              <div class="table-header-element">
+                <p>Teachers Comments</p>
+                <img src="{% static '/assets/sort_icon.png' %}"
+                     alt="sort icon"
+                     class="sort-icon">
+              </div>
+            </th>
+            <th onclick="sortTable(6)">
+              <div class="table-header-element">
+                <p>Status</p>
+                <img src="{% static '/assets/sort_icon.png' %}"
+                     alt="sort icon"
+                     class="sort-icon">
+              </div>
+            </th>
+            <th onclick="sortTable(7)">
+              <div class="table-header-element">
+                <p>SM Comments</p>
+                <img src="{% static '/assets/sort_icon.png' %}"
+                     alt="sort icon"
+                     class="sort-icon">
+              </div>
+            </th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for number, order in table %}
+            <tr>
+              <td>{{ number }}</td>
+              <td class="item-cell">{{ order.name }}</td>
+              <td>
+                <div class="table-image">
+                  <img src="{{ order.image_url }}"
+                       alt="Item Image"
+                       id="zoom-image"
+                       class="zoomable-image">
+                </div>
+              </td>
+              <td>{{ order.quantity }}</td>
+              <td>{{ order.measurement }}</td>
+              <td>{{ order.delivered_quantity }}</td>
+              <td class="comment-cell">{{ order.teachers_comments }}</td>
+              <td class="status-cell">
+                <div class="status-box">
+                  <p class="status status-pending">{{ order.status }}</p>
+                </div>
+              </td>
+              <td class="sm-comment-cell">{{ order.sm_comments }}</td>
+              <td>
+                <div class="action-box">
+                  <a href="{% url 'edit_order' order.id %}" class="action-link">
+                    <img src="{% static 'assets/edit-64.png' %}" alt="edit button">
+                  </a>
+                  <button class="action-link delete-item">
+                    <img src="{% static 'assets/delete-64.png' %}" alt="delete button">
+                  </button>
+                </div>
+              </td>
+              <div class="confirmation-box">
+                <div class="confirmation-content">
+                  <p>Are you sure you want to delete this item?</p>
+                  <div class="confirm-buttons">
+                    <a href="{% url 'delete_order' order.id %}" class="confirm-btn">Yes</a>
+                    <button class="cancel-btn">No</button>
+                  </div>
+                </div>
+              </div>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  {% if table.count > 0 %}
+  <div class="pagination_container">
+    <ul class="pagination">
+      {% if table.number > 1 %}
+        <li>
+          <a href="?page=1" class="page"><<</a>
+        </li>
+        <li>
+          <a href="?page={{ orders.previous_page_number }}" class="page"><</a>
+        </li>
+      {% endif %}
+      {% for num in table.paginator.page_range %}
+        {% if num == table.number %}
+          <li>
+            <span class="page active">{{ num }}</span>
+          </li>
+        {% elif num > 1 and num < table.paginator.num_pages %}
+          {% if num >= table.number|add:"-1" and num <= table.number|add:"1" %}
+            <li>
+              <a href="?page={{ num }}" class="page">{{ num }}</a>
+            </li>
+          {% elif num == table.number|add:"2" or num == table.number|add:"-2" %}
+            <li>
+              <span class="page">...</span>
+            </li>
+          {% endif %}
+        {% elif num == table.paginator.num_pages %}
+          <li>
+            <a href="?page={{ num }}" class="page">{{ num }}</a>
+          </li>
+        {% endif %}
+      {% endfor %}
+      {% if table.has_next %}
+        <li>
+          <a href="?page={{ orders.next_page_number }}" class="page">></a>
+        </li>
+        {% if table.next_page_number != table.paginator.num_pages %}
+          <li>
+            <a href="?page={{ orders.paginator.num_pages }}" class="page">>></a>
+          </li>
+      {% endif %}
+    </ul>
+  </div>
+
+  {% endif %}
+
+  <div class="zoomed-photo">
+    <span class="close-btn"
+          style="color: white;
+                 position: absolute;
+                 top: 20px;
+                 right: 20px;
+                 cursor: pointer">&times;</span>
+    <img class="zoomed-image" src="" alt="">
+  </div>
+  <script src="{% static 'js/table.js' %}"></script>
+{% endblock %}

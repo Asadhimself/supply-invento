@@ -1,30 +1,22 @@
 {% extends "supply/base.html" %}
 {% load static %}
-
-{% block title %} {{teacher}} orders {% endblock %}
-
+{% block title %}{{ teacher }} orders{% endblock %}
 {% block head %}
 <link rel="stylesheet" href="{% static 'css/table.css' %}">
 <link rel="stylesheet" href="{% static 'css/add_order.css' %}">
 {% endblock head %}
-
 {% block content %}
 <main>
   <div class="main-subcontainer">
     <div class="options">
-      <p class="teachers-name">{{teacher}}</p>
-      <a href="#" class="archive-link">Archive</a>
-      <label for="show" class="show-label">Show rows:</label>
-      <select name="show" id="show">
-        <option value="25">25</option>
-        <option value="50">50</option>
-        <option value="100">100</option>
-      </select>
+      <p class="teachers-name">{{ teacher }}</p>
+      <a href="{% url 'manage_archive' teacher.id %}" class="archive-link">Archive</a>
       <div class="date-range">
         <label for="min_date" class="show-label">Min Date:</label>
         <input type="date" name="min_date" id="min_date" class="date-box">
         <label for="max_date" class="show-label">Max Date:</label>
         <input type="date" name="max_date" id="max_date" class="date-box">
+        <button class="show-label" type="submit">Filter</button>
       </div>
     </div>
     <div class="tab">
@@ -32,7 +24,6 @@
       <button class="tablinks" onclick="filterTable('pending', event)">Pending</button>
       <button class="tablinks" onclick="filterTable('partial', event)">Partial</button>
       <button class="tablinks" onclick="filterTable('full', event)">Full</button>
-
       <div class="searchbox">
         <input type="text" name="search" id="search" class="search-input" placeholder="Search...">
         <button type="submit" class="search-btn">
@@ -134,41 +125,44 @@
       <tbody>
         {% for order in orders %}
         <tr>
-          <td>{{order.id}}</td>
-          <td class="item-cell">{{order.name}}</td>
+          <td>{{ order.id }}</td>
+          <td class="item-cell">{{ order.name }}</td>
           <td>
             <div class="table-image">
-              <img src="{{order.image_url}}" alt="">
+              <img src="{{ order.image_url }}" alt="">
             </div>
           </td>
-          <td>{{order.quantity}}</td>
-          <td>{{order.measurement}}</td>
-          <td>{{order.delivered}}</td>
-          <td>{{order.in_stock}}</td>
-          <td class="comment-cell">{{order.teachers_comments}}</td>
-          <td>{{order.price}}</td>
-          <td>{{order.teacher_recieved}}</td>
-          <td class="sm-comment-cell">{{order.st_comments}}</td>
-          <td class="sm-comment-cell">{{order.sm_comments}}</td>
-          <td>{{order.order_date|date:"d/m/Y"}}</td>
-          <td>{{date_of_reciept|date:"d/m/Y"}}</td>
+          <td>{{ order.quantity }}</td>
+          <td>{{ order.measurement }}</td>
+          <td>{{ order.delivered }}</td>
+          <td>{{ order.in_stock }}</td>
+          <td class="comment-cell">{{ order.teachers_comments }}</td>
+          <td>{{ order.price }}</td>
+          <td>{{ order.teacher_recieved }}</td>
+          <td class="sm-comment-cell">{{ order.st_comments }}</td>
+          <td class="sm-comment-cell">{{ order.sm_comments }}</td>
+          <td>{{ order.order_date|date:"d/m/Y" }}</td>
+          <td>{{ date_of_reciept|date:"d/m/Y" }}</td>
           <td class="status-cell">
             <div class="status-box">
-              <p class="status status-pending">{{order.status}}</p>
+              <p class="status status-pending">{{ order.status }}</p>
             </div>
           </td>
           <td>
             <div class="action-box">
               {% if user.role == "Supplier" %}
               <a href="{% url 'sm_edit' order.id %}" class="action-link">
-              {% else %}
-              <a href="{% url 'st_edit' order.id %}" class="action-link">
-              {% endif %}
-                <img src="{% static 'assets/edit-64.png' %}" alt="edit button">
-              </a>
-              <a href="#" class="action-link delete-item">
-                <img src="{% static 'assets/delete-64.png' %}" alt="delete button">
-              </a>
+                {% else %}
+                <a href="{% url 'st_edit' order.id %}" class="action-link">
+                  {% endif %}
+                  <img src="{% static 'assets/edit-64.png' %}" alt="edit button">
+                </a>
+                <a href="#" class="action-link delete-item">
+                  <img src="{% static 'assets/delete-64.png' %}" alt="delete button">
+                </a>
+                <button class="action-link archive-item">
+                  <img src="{% static 'assets/archive_icon.png' %}" alt="archive button">
+                </button>
             </div>
           </td>
           <div class="confirmation-box">
@@ -183,12 +177,53 @@
         </tr>
         {% endfor %}
       </tbody>
-
     </table>
   </div>
-
 </main>
 
-<script src="{% static 'js/table.js' %}"></script>
+<div class="pagination_container">
+  <ul class="pagination">
+    {% if orders.number > 1 %}
+    <li>
+      <a href="?page=1" class="page">&lt;&lt;</a>
+    </li>
+    <li>
+      <a href="?page={{ orders.previous_page_number }}" class="page">&lt;</a>
+    </li>
+    {% endif %}
+    {% for num in orders.paginator.page_range %}
+      {% if num == orders.number %}
+        <li><span class="page active">{{ num }}</span></li>
+      {% else %}
+        {% if num > 1 and num < orders.paginator.num_pages %}
+          {% if num >= orders.number|add:"-1" and num <= orders.number|add:"1" %}
+            <li><a href="?page={{ num }}" class="page">{{ num }}</a></li>
+          {% elif num == orders.number|add:"2" or num == orders.number|add:"-2" %}
+            <li><span class="page">...</span></li>
+          {% endif %}
+        {% elif num == orders.paginator.num_pages %}
+          <li><a href="?page={{ num }}" class="page">{{ num }}</a></li>
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+    {% if orders.has_next %}
+      <li><a href="?page={{ orders.next_page_number }}" class="page">&gt;</a></li>
+      {% if orders.next_page_number != orders.paginator.num_pages %}
+        <li><a href="?page={{ orders.paginator.num_pages }}" class="page"> &gt;&gt; </a></li>
+      {% endif %}
+    {% endif %}
+  </ul>
+</div>
 
+
+
+<div class="zoomed-photo">
+  <span class="close-btn" style="color: white;
+                   position: absolute;
+                   top: 20px;
+                   right: 20px;
+                   cursor: pointer">&times;</span>
+  <img class="zoomed-image" src="" alt="">
+</div>
+<script src="{% static 'js/table.js' %}"></script>
 {% endblock %}

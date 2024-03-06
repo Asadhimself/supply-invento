@@ -95,7 +95,12 @@ class OrderTable(models.Model):
         ("Fully recieved", "Order is fully recieved to teacher"),
     ]
     status = models.CharField(max_length=25, choices=STATUS, default=STATUS[0][0])
+    is_archive = models.BooleanField(default=False)
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+
 
     def __str__(self) -> str:
         return f"{self.name}"
+
+    class Meta:
+        ordering = ["-order_date"]

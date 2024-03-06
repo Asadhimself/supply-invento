@@ -1,11 +1,23 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
+from django.db.models import Q
 from django.http import Http404, HttpResponse, HttpResponseForbidden
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from .models import CustomUser, OrderTable
 from .forms import OrderForm, SmOrderEdit, StOrderEdit
 
+
+def make_pagination(request, obj):
+    p = Paginator(obj, 10)
+    page_number = request.GET.get("page")
+    page_obj = p.get_page(page_number)
+    return page_obj
+
+
+def is_editable()-> bool:
+    pass
 
 def login_view(request):
     if request.method == "POST":
@@ -37,10 +49,11 @@ def home_view(request):
         admin_url = reverse("admin:index")
         return redirect(admin_url)
     if request.user.role == "Teacher":
-        table = OrderTable.objects.filter(user=request.user)
+        table = OrderTable.objects.filter(user=request.user, is_archive=False)
         for order in table:
             order.status = order.status.split()[0]
         table = list(enumerate(table, start=1))
+        table = make_pagination(request, table)
         return render(request, "supply/teachers_home.html", {"table": table})
     elif request.user.role == "Supplier" or request.user.role == "Storekeeper":
         classes = ["EYPYP", "PYP", "MYP", "DP"]
@@ -114,10 +127,23 @@ def section_view(request, pk):
 def manage_teachers_table(request, user_id):
     if request.user.role not in ["Supplier", "Storekeeper"]:
         return HttpResponse("Access is forbidden")
-    orders = OrderTable.objects.filter(user=user_id)
+    min_date = request.GET.get('min_date')
+    max_date = request.GET.get('max_date')
+    orders = OrderTable.objects.filter(user=user_id, is_archive=False)
+    if min_date or max_date:
+        date_filter = Q()
+        if min_date:
+            date_filter |= Q(order_date__gte=min_date) | Q(date_of_reciept__gte=min_date)
+
+        if max_date:
+            date_filter |= Q(order_date__lte=max_date) | Q(date_of_reciept__lte=max_date)
+        print(len(orders))
+        orders = orders.filter(date_filter)
+        print(len(orders))
     for order in orders:
         order.status = order.status.split()[0]
     teacher = CustomUser.objects.get(id=user_id)
+    orders = make_pagination(request, orders)
     return render(
         request,
         "supply/manage_teachers_table.html",
@@ -163,6 +189,28 @@ def manage_delete_order_view(request, order_id):
         if request.method == "POST" or request.method == "GET":
             order.delete()
             return redirect("manage_table", order_user_id)
+
+
+@login_required(login_url="/login")
+def teacher_archive_view(request):
+    table = OrderTable.objects.filter(user=request.user, is_archive=True)
+    return render(request, "supply/archive_teacher.html", {"table": table})
+
+
+@login_required(login_url="/login")
+def manage_archive_view(request, user_id):
+    if request.user.role not in ["Supplier", "Storekeeper"]:
+        return HttpResponse("Access is forbidden")
+    orders = OrderTable.objects.filter(user=user_id, is_archive=True)
+    for order in orders:
+        order.status = order.status.split()[0]
+    teacher = CustomUser.objects.get(id=user_id)
+    orders = make_pagination(request, orders)
+    return render(
+        request,
+        "supply/archive_manage.html",
+        {"orders": orders, "teacher": teacher},
+    )
 
 
 def custom_403(request, exception):
