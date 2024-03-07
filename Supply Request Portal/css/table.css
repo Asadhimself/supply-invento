@@ -1,3 +1,11 @@
+.table-subcontainer {
+  width: 100%;
+  overflow-x: auto;
+  margin-bottom: 1rem;
+  box-shadow: 0 0 1rem #ababab;
+  background-color: transparent;
+}
+
 table {
   margin: 0 auto;
   width: 100%;
@@ -6,7 +14,6 @@ table {
   border-radius: 0.5rem;
   background-color: white;
   box-shadow: 0 0 1rem #ababab;
-  margin-bottom: 2rem;
   font-size: 0.8rem;
 }
 
@@ -157,7 +164,7 @@ tr:last-child td:last-child {
 
 .tab {
   display: flex;
-  margin-left: 1rem;
+  margin-left: 2rem;
   margin-bottom: -1px;
   z-index: 1;
 }
