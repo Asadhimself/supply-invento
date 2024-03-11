@@ -17,6 +17,11 @@ body {
   max-width: 100%;
 }
 
+#login_form {
+  min-height: 90vh;
+  margin: 0 auto;
+}
+
 .main-subcontainer {
   margin: 1rem auto;
   width: 95%;
