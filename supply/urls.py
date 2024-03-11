@@ -1,6 +1,7 @@
 from django.urls import path
 
 from supply.views import (
+    archive_order,
     edit_order_view,
     login_view,
     home_view,
@@ -14,7 +15,10 @@ from supply.views import (
     sm_edit_view,
     st_edit_view,
     teacher_archive_view,
-    manage_archive_view
+    manage_archive_view,
+    unarchive_order,
+    search_view,
+    search_archive_view,
 )
 
 
@@ -30,10 +34,13 @@ urlpatterns = [
     path("manage_table/<int:user_id>", manage_teachers_table, name="manage_table"),
     path("sm_edit/<int:order_id>", sm_edit_view, name="sm_edit"),
     path("st_edit/<int:order_id>", st_edit_view, name="st_edit"),
-    path("manage_delete/<int:order_id>", manage_delete_order_view, name="manage_delete"),
+    path(
+        "manage_delete/<int:order_id>", manage_delete_order_view, name="manage_delete"
+    ),
     path("archive/", teacher_archive_view, name="teacher_archive"),
     path("archive/<int:user_id>", manage_archive_view, name="manage_archive"),
+    path("archive_order/<int:order_id>", archive_order, name="archive_order"),
+    path("unarchive_order/<int:order_id>", unarchive_order, name="unarchive_order"),
+    path("search/<int:user_id>", search_view, name="search"),
+    path("search_archive/<int:user_id>", search_archive_view, name="search_archive"),
 ]
-
-handler403 = "supply.views.custom_403"
-

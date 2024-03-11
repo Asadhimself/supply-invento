@@ -34,7 +34,7 @@ class OrderForm(forms.ModelForm):
 class SmOrderEdit(forms.ModelForm):
     class Meta:
         model = OrderTable
-        fields = ["price", "sm_comments", "status"]
+        fields = ["price", "sm_comments", "status", "date_of_reciept"]
 
     def __init__(self, *args, **kwargs):
         super(SmOrderEdit, self).__init__(*args, **kwargs)

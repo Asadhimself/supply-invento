@@ -26,7 +26,7 @@ SECRET_KEY = "django-insecure-)mlo(8#kp)lqcip)2z_!2#8sx!#z^c#(&bnse-y5=@wbuc)0y!
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "supply",
-    "django_seed"
+    "django_seed",
 ]
 
 MIDDLEWARE = [
@@ -85,8 +85,8 @@ DATABASES = {
         # 'PASSWORD': '',
         # 'HOST': 'localhost',
         # 'PORT': '5432',
-        'ENGINE': 'django.db.backends.sqlite3',                 #SQLite DB for demo purposes
-        'NAME': BASE_DIR / 'db.sqlite3',
+        "ENGINE": "django.db.backends.sqlite3",  # SQLite DB for demo purposes
+        "NAME": BASE_DIR / "db.sqlite3",
     }
 }
 
@@ -134,6 +134,4 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 STATIC_URL = "/static/"
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "supply/static")]
-
-
-handler403 = "supply.views.custom_403"
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")

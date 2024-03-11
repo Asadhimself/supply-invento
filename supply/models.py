@@ -1,3 +1,4 @@
+import datetime
 from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
 from django.contrib.auth.models import PermissionsMixin
 from django.db import models
@@ -56,10 +57,9 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     objects = CustomUserManager()
-
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
-    
+
     def has_perm(self, perm, obj=None):
         "Does the user have a specific permission?"
         return True
@@ -68,7 +68,6 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         "Does the user have permissions to view the app `app_label`?"
         return True
 
-    
     class Meta:
         verbose_name = "User"
         verbose_name_plural = "Users"
@@ -97,7 +96,6 @@ class OrderTable(models.Model):
     status = models.CharField(max_length=25, choices=STATUS, default=STATUS[0][0])
     is_archive = models.BooleanField(default=False)
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
-
 
     def __str__(self) -> str:
         return f"{self.name}"

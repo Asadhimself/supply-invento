@@ -1,0 +1,26 @@
+{% extends "supply/base.html" %}
+
+{% block title %}
+
+404 Page not found
+
+{% endblock title %}
+
+
+{% block head %}
+
+<link rel="stylesheet" href="{% static 'css/profile.css' %}">
+
+{% endblock head %}
+
+
+{% block content %}
+  <div class="denied">
+    <div class="denied-message">
+      <h3>404</h3>
+      <h4>Page not found ~_~</h4>
+    </div>
+    <img src="{% static 'assets/denied.png' %}" alt="denied">
+  </div>
+
+{% endblock content %}

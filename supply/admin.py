@@ -10,7 +10,7 @@ class CustomUserAdmin(UserAdmin):
     add_form = CustomUserCreationForm
     form = CustomUserChangeForm
     model = CustomUser
-    list_display = ("get_user_info", "is_staff", "is_active", "role")
+    list_display = ("get_user_info", "user_class", "is_staff", "is_active", "role")
     list_filter = ("is_staff", "is_active", "role", "user_class")
     fieldsets = (
         (None, {"fields": ("first_name", "last_name","email", "password")}),
@@ -36,7 +36,7 @@ class CustomUserAdmin(UserAdmin):
             },
         ),
     )
-    search_fields = ("email",)
+    search_fields = ("email", "user_class", "first_name", "last_name")
     ordering = ("email",)
     def get_user_info(self, obj):
         if obj.user_class:
@@ -46,10 +46,10 @@ class CustomUserAdmin(UserAdmin):
         
 
 class OrderTableAdmin(admin.ModelAdmin):
-    readonly_fields = ('order_date', )
-    list_display = ('name', 'user', 'get_photo', 'status')
+    readonly_fields = ('order_date', 'date_of_reciept')
+    list_display = ('id', 'name', 'user', 'get_photo', 'status',)
     list_filter = ('status', )
-    search_fields = ('user__first_name', 'user__last_name', 'user__email', 'name')
+    search_fields = ('id', 'user__first_name', 'user__last_name', 'user__email', 'name')
     def get_photo(self, obj):
         if obj.image_url:
             return mark_safe(f'<img src="{obj.image_url}" width=50px>')

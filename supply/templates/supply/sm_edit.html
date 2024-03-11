@@ -35,9 +35,19 @@ Edit
     <div class="dropdown">
       <label for="status">Status:</label>
       <select name="status" id="status">
-        <option value="Pending">Pending</option>
+        {% if order.status == "Pending" %}
+        <option selected value="Pending">Pending</option>
         <option value="Partially In Stock">Partial</option>
         <option value="Fully recieved">Full</option>
+        {% elif order.status == "Partially In Stock" %}
+        <option value="Pending">Pending</option>
+        <option selected value="Partially In Stock">Partial</option>
+        <option value="Fully recieved">Full</option>
+        {% else %}
+        <option value="Pending">Pending</option>
+        <option value="Partially In Stock">Partial</option>
+        <option selected value="Fully recieved">Full</option>
+        {% endif %}
       </select>
     </div>
     <div class="buttons">
