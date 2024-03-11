@@ -61,90 +61,75 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Delete confirm logic
 
-// Define delete buttons and archive buttons
-var deleteButtons = document.querySelectorAll('.delete-item');
-var archiveButtons = document.querySelectorAll('.archive-item');
+document.addEventListener("DOMContentLoaded", function() {
+  // Function to show confirmation box
+  function showConfirmationBox(box) {
+      box.style.display = 'block';
+  }
 
-// Get confirmation boxes and buttons
-var deleteConfirmationBox = document.getElementById('delete-confirm');
-var archiveConfirmationBox = document.getElementById('archive-confirm');
-var deleteConfirmButton = deleteConfirmationBox.querySelector('.confirm-btn.delete-confirm');
-var archiveConfirmButton = archiveConfirmationBox.querySelector('.confirm-btn.archive-confirm');
-var deleteCancelButton = deleteConfirmationBox.querySelector('.cancel-btn');
-var archiveCancelButton = archiveConfirmationBox.querySelector('.cancel-btn');
+  // Function to hide confirmation boxes
+  function hideConfirmationBoxes() {
+      document.querySelectorAll('.confirmation-box').forEach(function(box) {
+          box.style.display = 'none';
+      });
+  }
 
-// Function to show confirmation box for delete
-function showDeleteConfirmationBox(itemId) {
-    deleteConfirmationBox.dataset.itemId = itemId; // Store the item ID in the confirmation box
-    deleteConfirmationBox.style.display = 'block';
-}
+  // Add click event listener to each delete button
+  document.querySelectorAll('.delete-item').forEach(function(button) {
+      button.addEventListener('click', function(event) {
+          event.preventDefault();
+          var row = button.closest('tr');
+          var confirmationBoxId = button.getAttribute('data-confirm-id');
+          var confirmationBox = row.querySelector('#' + confirmationBoxId);
+          hideConfirmationBoxes();
+          showConfirmationBox(confirmationBox);
+          event.stopPropagation();
+      });
+  });
 
-// Function to show confirmation box for archive
-function showArchiveConfirmationBox(itemId) {
-    archiveConfirmationBox.dataset.itemId = itemId; // Store the item ID in the confirmation box
-    archiveConfirmationBox.style.display = 'block';
-}
+  // Add click event listener to each archive button
+  document.querySelectorAll('.archive-item').forEach(function(button) {
+      button.addEventListener('click', function(event) {
+          event.preventDefault();
+          var row = button.closest('tr');
+          var confirmationBoxId = button.getAttribute('data-confirm-id');
+          var confirmationBox = row.querySelector('#' + confirmationBoxId);
+          hideConfirmationBoxes();
+          showConfirmationBox(confirmationBox);
+          event.stopPropagation();
+      });
+  });
 
-// Function to hide confirmation boxes
-function hideConfirmationBoxes() {
-    deleteConfirmationBox.style.display = 'none';
-    archiveConfirmationBox.style.display = 'none';
-}
+  // Add click event listener to delete and archive confirm buttons
+  document.querySelectorAll('.confirm-btn').forEach(function(button) {
+      button.addEventListener('click', function() {
+          var row = button.closest('tr');
+          if (button.classList.contains('delete-confirm')) {
+              console.log('Item deleted');
+          } else if (button.classList.contains('archive-confirm')) {
+              console.log('Item archived');
+          }
+          hideConfirmationBoxes();
+      });
+  });
 
-// Add click event listener to each delete button
-deleteButtons.forEach(function(button) {
-    button.addEventListener('click', function(event) {
-        event.preventDefault(); // Prevent default link behavior
-        var itemId = button.dataset.itemId; // Get the ID of the item associated with the button
-        showDeleteConfirmationBox(itemId); // Pass the item ID to the confirmation box function
-        event.stopPropagation(); // Prevent click event from propagating to document body
-    });
+  // Add click event listener to cancel buttons
+  document.querySelectorAll('.cancel-btn').forEach(function(button) {
+      button.addEventListener('click', function() {
+          hideConfirmationBoxes();
+      });
+  });
+
+  // Add click event listener to document body to close confirmation boxes when clicked outside of them
+  document.body.addEventListener('click', function(event) {
+      document.querySelectorAll('.confirmation-box').forEach(function(box) {
+          if (!box.contains(event.target)) {
+              hideConfirmationBoxes();
+          }
+      });
+  });
 });
 
-// Add click event listener to each archive button
-archiveButtons.forEach(function(button) {
-    button.addEventListener('click', function(event) {
-        event.preventDefault(); // Prevent default link behavior
-        var itemId = button.dataset.itemId; // Get the ID of the item associated with the button
-        showArchiveConfirmationBox(itemId); // Pass the item ID to the confirmation box function
-        event.stopPropagation(); // Prevent click event from propagating to document body
-    });
-});
-
-// Add click event listener to delete confirm button
-deleteConfirmButton.addEventListener('click', function() {
-    var itemId = deleteConfirmationBox.dataset.itemId; // Get the item ID stored in the confirmation box
-    // Perform delete operation here based on itemId
-    console.log('Item ' + itemId + ' deleted');
-    hideConfirmationBoxes();
-});
-
-// Add click event listener to archive confirm button
-archiveConfirmButton.addEventListener('click', function() {
-    var itemId = archiveConfirmationBox.dataset.itemId; // Get the item ID stored in the confirmation box
-    // Perform archive operation here based on itemId
-    console.log('Item ' + itemId + ' archived');
-    hideConfirmationBoxes();
-});
-
-// Add click event listener to delete cancel button
-deleteCancelButton.addEventListener('click', function() {
-    console.log('Delete action cancelled');
-    hideConfirmationBoxes();
-});
-
-// Add click event listener to archive cancel button
-archiveCancelButton.addEventListener('click', function() {
-    console.log('Archive action cancelled');
-    hideConfirmationBoxes();
-});
-
-// Add click event listener to document body to close confirmation boxes when clicked outside of them
-document.body.addEventListener('click', function(event) {
-    if (!deleteConfirmationBox.contains(event.target) && !archiveConfirmationBox.contains(event.target)) {
-        hideConfirmationBoxes();
-    }
-});
 
 
 
