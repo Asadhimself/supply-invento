@@ -1,4 +1,4 @@
-# Supply-Invento
+![image](https://github.com/Asadhimself/supply-invento/assets/108661259/0a7cf42e-9cdb-45ca-811f-792494f48712)# Supply-Invento
 
 Supply-Invento was a CRM-like project developed using Django.
 
@@ -51,6 +51,10 @@ python manage.py runserver
 - **Storekeeper**: a.sanches@demo.uz (Password: Demo2020)
 - **Supplier**: i.ivanov@demo.uz (Password: Demo2020)
 - **Teacher**: j.doe@demo.uz (Password: Demo2020)
+
+## Live Demo
+
+Check out the live demo [here](https://pythonanywhere.asadhimself.com).
 
 ## Disclaimer
 
