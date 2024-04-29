@@ -8,6 +8,7 @@ Supply-Invento aimed to streamline inventory management and supply chain process
 
 ## Tech Stack
 
+- Python <img height="20" width="20" src="https://cdn.simpleicons.org/python" />
 - Django <img height="20" width="20" src="https://cdn.simpleicons.org/django/white" />
 - PostgreSQL <img height="20" width="20" src="https://cdn.simpleicons.org/postgresql" />
 - HTML / CSS <img height="20" width="20" src="https://cdn.simpleicons.org/html5" /> <img height="20" width="20" src="https://cdn.simpleicons.org/css3" />
