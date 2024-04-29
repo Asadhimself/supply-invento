@@ -58,7 +58,8 @@ Check out the live demo [here](https://pythonanywhere.asadhimself.com).
 
 ## Credits
 
-Frontend developer: [ameerkhansaeed](https://github.com/ameerkhansaeed) <img height="20" width="20" src="https://cdn.simpleicons.org/github/white" />
+Frontend developer: [ameerkhansaeed](https://github.com/ameerkhansaeed) <img height="20" width="20" src="https://cdn.simpleicons.org/github/white" /> <br>
+You can explore frontend code for itself [here](https://github.com/Asadhimself/supply-invento/branch/frontend)
 
 ## Disclaimer
 
