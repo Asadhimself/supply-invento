@@ -56,6 +56,10 @@ python manage.py runserver
 
 Check out the live demo [here](https://pythonanywhere.asadhimself.com).
 
+## Credits
+
+Frontend developer: [ameerkhansaeed](https://github.com/ameerkhansaeed)
+
 ## Disclaimer
 
 The project has been taken from production since the developer's departure from the organization.
