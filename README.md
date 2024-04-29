@@ -1,4 +1,4 @@
-![image](https://github.com/Asadhimself/supply-invento/assets/108661259/0a7cf42e-9cdb-45ca-811f-792494f48712)# Supply-Invento
+# Supply-Invento
 
 Supply-Invento was a CRM-like project developed using Django.
 
