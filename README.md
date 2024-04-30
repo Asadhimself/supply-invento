@@ -52,6 +52,7 @@ python manage.py runserver
 - **Storekeeper**: a.sanches@demo.uz (Password: Demo2020)
 - **Supplier**: i.ivanov@demo.uz (Password: Demo2020)
 - **Teacher**: j.doe@demo.uz (Password: Demo2020)
+- **Teacher**: s.moore@demo.uz (Password: Demo2020)
 
 ## Live Demo
 
